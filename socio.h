@@ -13,6 +13,7 @@ class Socio
         DtFecha fechaIngreso;
     public:
         Socio();
+        Socio(string ci, string Nombre, DtFecha fechaIngreso);
         void setCi(string ci);
         string getCi();
         void setNombre(string Nombre);

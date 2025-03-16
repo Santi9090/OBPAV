@@ -3,6 +3,7 @@
 #include <string>
 using namespace std;   
 
+Socio::Socio(){}
 Socio::Socio() {
     this->ci = "";
     this->Nombre = "";

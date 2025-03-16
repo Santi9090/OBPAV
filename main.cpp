@@ -1,9 +1,12 @@
 #include <iostream>
 #include <string>
-
+#include "socio.h"
 using namespace std;
 
 int menu=9; // Variable que almacena la opción del menú
+
+Socio* psocio = new Socio("1234567" , "Juan", DtFecha(1,1,2020)); // Creación de un objeto de la clase Socio
+
 
 do
 {
