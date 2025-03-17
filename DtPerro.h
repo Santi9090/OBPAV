@@ -2,18 +2,19 @@
 #define DT_PERRO_H
 
 #include "DtMascota.h"
-#include "razaPerro.h"
+#include "RazaPerro.h"
+#include "Genero.h"
 
 class DtPerro : public DtMascota {
 private:
-    razaPerro raza;
+    RazaPerro raza;
     bool vacunaCachorro;
 
 public:
-    DtPerro(const string& nombre, Genero genero, float peso, float racionDiaria, razaPerro raza, bool vacunaCachorro);
-    razaPerro getRaza() const;
+    DtPerro(const string& nombre,Genero genero, float peso, float racionDiaria, RazaPerro raza, bool vacunaCachorro);
+    RazaPerro getRaza() const;
     bool getVacunaCachorro() const;
-    void setRaza(razaPerro raza);
+    void setRaza(RazaPerro raza);
     void setVacunaCachorro(bool vacunaCachorro);
     ~DtPerro();
 };
