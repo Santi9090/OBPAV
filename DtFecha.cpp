@@ -6,18 +6,27 @@ using namespace std;
 
 DtFecha::DtFecha(){}
 DtFecha::DtFecha( int dia, int mes , int anio){
-     this->fecha=fecha;
+     this->mes=mes;
      this->dia=dia;
      this->anio=anio;
 }
 
-int DtFecha::getDia() const {
-     return dia; 
+int DtFecha::getDia() {
+     return this->dia; 
     }
-int DtFecha::getMes() const {
-     return mes; 
+void DtFecha::setDia(int dia){
+     this->dia = dia;
+}
+int DtFecha::getMes() {
+     return this->mes; 
     }
-int DtFecha::getAnio() const {
-     return anio; 
+void DtFecha::setMes(int mes){
+     this->mes = mes;
+}   
+int DtFecha::getAnio() {
+     return this->anio; 
     }
+void DtFecha::setAnio(int anio){
+     this->anio = anio;
+}
     
