@@ -3,7 +3,7 @@
 #include <iostream>
 #include <string>
 
-include namespace std; // Uso del espacio de nombres std
+using namespace std; // Uso del espacio de nombres std
 class DtFecha
 {
 private:
@@ -14,9 +14,12 @@ public:
     DtFecha();
     DtFecha(int dia, int mes, int anio);
     int getDia();
-    int getMes()
+    void setDia(int dia);
+    int getMes();
+    void setMes(int mes);
     int getAnio();
-    ~
+    void setAnio(int anio);
+    ~DtFecha();
 };
 
 #endif // DT_FECHA_H
