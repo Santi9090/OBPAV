@@ -20,8 +20,6 @@ class Socio
         void setFechaIngreso(DtFecha fechaIngreso);
         DtFecha getFechaIngreso();
         ~Socio();
-
-        
 }
 
 

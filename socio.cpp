@@ -20,7 +20,6 @@ string Socio::getCi(){
 
 void Socio::setNombre(string nombre){
     this->nombre = nombre;
-
 }
 
 string Socio:getNombre(){
