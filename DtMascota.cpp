@@ -1,7 +1,7 @@
 #include "DtMascota.h"
 #include <iostream>
 #include <string>
-using namespace
+using namespace std;
 
 DtMascota::DtMascota(const string& nombre, Genero genero, float peso, float racionDiaria)
     : nombre(nombre), genero(genero), peso(peso), racionDiaria(racionDiaria) {}

@@ -1,6 +1,7 @@
 #ifndef DT_MASCOTA_H
 #define DT_MASCOTA_H
 #include <string>
+#include "Genero.h"
 
 class DtMascota {
 private:
