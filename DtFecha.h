@@ -13,10 +13,10 @@ private:
 public:
     DtFecha();
     DtFecha(int dia, int mes, int anio);
-
     int getDia();
     int getMes()
     int getAnio();
+    ~
 };
 
 #endif // DT_FECHA_H

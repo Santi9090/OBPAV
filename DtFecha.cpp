@@ -4,8 +4,12 @@
 
 using namespace std;
 
-DtFecha::DtFecha() : dia(1), mes(1), anio(2000) {}
-DtFecha::DtFecha(int dia, int mes, int anio) : dia(dia), mes(mes), anio(anio) {}
+DtFecha::DtFecha(){}
+DtFecha::DtFecha( int dia, int mes , int anio){
+     this->fecha=fecha;
+     this->dia=dia;
+     this->anio=anio;
+}
 
 int DtFecha::getDia() const {
      return dia; 

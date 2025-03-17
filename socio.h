@@ -12,7 +12,6 @@ class Socio
         string Nombre;
         DtFecha fechaIngreso;
     public:
-        Socio();
         Socio(string ci, string Nombre, DtFecha fechaIngreso);
         void setCi(string ci);
         string getCi();
