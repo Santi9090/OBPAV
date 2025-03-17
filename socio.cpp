@@ -4,7 +4,7 @@
 using namespace std;   
 
 Socio::Socio(){}
-Socio::Socio() {
+Socio::Socio( string ci, string Nombre, DtFecha fechaIngreso){ {
     this->ci = "";
     this->Nombre = "";
     this->fechaIngreso = DtFecha();
