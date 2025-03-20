@@ -1,5 +1,5 @@
-main: DtConsulta.o DtFecha.o DtGato. DtMascota.o DtPerro.o Genero.o Socio.o RazaPerro.o TipoPelo.o main.o
-	g++ DtConsulta.o DtFecha.o DtGato. DtMascota.o DtPerro.o Genero.o Socio.o RazaPerro.o TipoPelo.o main.o -o exec
+main: DtConsulta.o DtFecha.o Socio.o main.o 
+	g++ DtConsulta.o DtFecha.o  Socio.o main.o -o exec
 main.o: main.cpp
 
 DtConsulta.o: DtConsulta.cpp
@@ -12,9 +12,9 @@ DtMascota.o: DtMascota.cpp
 
 DtPerro.o: DtPerro.cpp
 
-genero.o: Genero.cpp
+#genero.o: Genero.cpp
 
-RazaPerro.o: RazaPerro.cpp
+#RazaPerro.o: RazaPerro.cpp
 
 Socio.o: Socio.cpp
 

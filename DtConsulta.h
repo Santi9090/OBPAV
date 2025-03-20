@@ -7,17 +7,16 @@ using namespace std;
 
 class DtConsulta {
 private:
-    DtFecha* fechaConsulta;
+    DtFecha fechaConsulta;
     string motivo;
 
 public:
-    DtConsulta(const DtFecha& fechaConsulta, const string& motivo);
-
-    DtFecha getFechaConsulta() const;
-    string getMotivo() const;
-
-    void setFechaConsulta(const DtFecha& fechaConsulta);
-    void setMotivo(const string& motivo);
+    DtConsulta();
+    DtConsulta(DtFecha fechaConsulta, string motivo);
+    DtFecha getFechaConsulta();
+    string getMotivo();
+    void setFechaConsulta(DtFecha fechaConsulta);
+    void setMotivo(string motivo);
     ~DtConsulta();
 };
 

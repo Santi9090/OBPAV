@@ -24,3 +24,5 @@ Consulta::getMotivo(){
 Consulta::setMotivo(string motivo){
     this->motivo= motivo;
 }
+
+Consulta::~Consulta(){}

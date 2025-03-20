@@ -1,11 +1,16 @@
 #include "DtMascota.h"
 #include <iostream>
 #include <string>
+
 using namespace std;
 
-DtMascota::DtMascota(const string& nombre, Genero genero, float peso, float racionDiaria)
-    : nombre(nombre), genero(genero), peso(peso), racionDiaria(racionDiaria) {}
-
+DtMascota::DtMascota() {}
+DtMascota::DtMascota(const string& nombre, Genero genero, float peso, float racionDiaria) {
+    this->nombre = nombre;
+    this->genero = genero;
+    this->peso = peso;
+    this->racionDiaria = racionDiaria;
+}
 string DtMascota::getNombre() const {
     return nombre;
 }

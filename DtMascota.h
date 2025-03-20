@@ -3,6 +3,7 @@
 #include <string>
 #include "Genero.h"
 
+using namespace std;
 class DtMascota {
 private:
     string nombre;
@@ -11,7 +12,7 @@ private:
     float racionDiaria;
 
 public:
-
+    DtMascota();
     DtMascota(const string& nombre, Genero genero, float peso, float racionDiaria);
     string getNombre() const;
     Genero getGenero() const;

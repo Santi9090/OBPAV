@@ -1,4 +1,4 @@
-#include <DtFecha.h>
+#include "DtFecha.h"
 #include <iostream>
 #include <string>
 
@@ -29,4 +29,6 @@ int DtFecha::getAnio() {
 void DtFecha::setAnio(int anio){
      this->anio = anio;
 }
+
+DtFecha::~DtFecha(){}
     

@@ -20,5 +20,5 @@ class Consulta{
         ~Consulta();
 
 
-}
+};
 #endif // CONSULTA_H

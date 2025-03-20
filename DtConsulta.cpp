@@ -3,22 +3,24 @@
 #include <string>
 using namespace std;
 
-DtConsulta::DtConsulta(const DtFecha& fechaConsulta, const string& motivo)
-    : fechaConsulta(fechaConsulta), motivo(motivo) {}
-
-DtFecha DtConsulta::getFechaConsulta() const {
+DtConsulta::DtConsulta() {}
+DtConsulta::DtConsulta(DtFecha fechaConsulta, string motivo){
+    this->fechaConsulta = fechaConsulta;
+    this->motivo = motivo;
+}
+DtFecha DtConsulta::getFechaConsulta()  {
     return fechaConsulta;
 }
 
-string DtConsulta::getMotivo() const {
+string DtConsulta::getMotivo() {
     return motivo;
 }
 
-void DtConsulta::setFechaConsulta(const DtFecha& fechaConsulta) {
+void DtConsulta::setFechaConsulta(DtFecha fechaConsulta) {
     this->fechaConsulta = fechaConsulta;
 }
 
-void DtConsulta::setMotivo(const string& motivo) {
+void DtConsulta::setMotivo( string motivo) {
     this->motivo = motivo;
 }
 DtConsulta::~DtConsulta() {}
