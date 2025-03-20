@@ -13,11 +13,11 @@ void Perro::setRaza(RazaPerro raza){
     this->raza = raza;
 }
 
-RazaPerro Perro::getRaza() const{
+RazaPerro Perro::getRaza(){
     return this->raza;
 }
 
-bool Perro::getVacunaCachorro() const{
+bool Perro::getVacunaCachorro(){
     return this->vacunaCachorro;
 }
 

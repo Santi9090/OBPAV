@@ -14,7 +14,7 @@ void Gato::setTipoPelo(TipoPelo tipoPelo){
     this->tipoPelo = tipoPelo;
 }
 
-TipoPelo Gato::getTipoPelo() const{
+TipoPelo Gato::getTipoPelo(){
     return this->tipoPelo;
 }
 
