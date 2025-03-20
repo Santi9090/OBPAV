@@ -3,6 +3,7 @@
 #include <string>
 using namespace std;
 
+DtPerro::DtPerro() {}
 DtPerro::DtPerro(const string& nombre, Genero genero, float peso, float racionDiaria, RazaPerro raza, bool vacunaCachorro)
     : DtMascota(nombre, genero, peso, racionDiaria), raza(raza), vacunaCachorro(vacunaCachorro) {}
 

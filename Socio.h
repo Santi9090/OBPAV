@@ -5,7 +5,8 @@
 #include <string>
 #include "DtFecha.h"
 #include "Consulta.h"
-#define CANT_MASCOTAS
+#include "Mascota.h"
+#define CANT_MASCOTAS 10
 
 using namespace std; // Uso del espacio de nombres std
 
@@ -28,10 +29,10 @@ class Socio
         string getNombre();
         void setFechaIngreso(DtFecha fechaIngreso);
         DtFecha getFechaIngreso();
-        void agregarConsulta(Consulta*)
+        void agregarConsulta(Consulta*);
         ~Socio();
-        Consulta** obtenerConslta(int&)
-        void eliminarConsulta(consulta&)
+        Consulta** obtenerConslta(int&);
+        Consulta** eliminarConsulta(Consulta consulta);
 };
 
 #endif // SOCIO_H

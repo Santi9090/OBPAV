@@ -8,36 +8,46 @@
 #include "Genero.h"
 #include "DtPerro.h"
 #include "DtGato.h"
+#define MAX_SOCIOS 999
 
 using namespace std;
 
 //TODOS LOS SOCIOS DEL SISTEMA
 struct{
-    Socio* Socio[MAX_SOCIOS];
+    Socio* socio[MAX_SOCIOS];
     int topeU;
 } coleccionSocios;
 
 
 //OPERACION A
-void registarSocio(string ci, string nombre, DtMascota& dtMascota){
-
-}
+//void registarSocio(string ci, string nombre, DtMascota& dtMascota){}
 //OPERACION B
-void agregarMascota(string ci, DtMascota& dtMascota){}
+//void agregarMascota(string ci, DtMascota& dtMascota){}
 //OPERACION C 
-void ingresarConsulta(string motivo, string ci){}
+//void ingresarConsulta(string motivo, string ci){}
 //OPERACION D 
-DtConsulta  verConsultasAntesDeFecha(DtFecha& fecha, string ciSocio, int& cantConsultas){}
+//DtConsulta  verConsultasAntesDeFecha(DtFecha& fecha, string ciSocio, int& cantConsultas){}
 //OPERACION E
-void eliminarSocio(string ci){}
+//void eliminarSocio(string ci){}
 //OPERACION F
-DtMascota  obtenerMascotas(string ci, int& cantMascotas){}
+//DtMascota  obtenerMascotas(string ci, int& cantMascotas){}
 
 
 void registrarSocio(string ci, string nombre, DtMascota& dtMascota){
-
-    dtMascota->setRacionDiaria(0);
-    Socio* socio= new Socio(ci,nombre,dtMascota);
+    int dia,mes,anio;
+    cout << "Ingresar Fecha de Ingreso" << endl;
+    cout << "Dia: " << endl;
+    cin >> dia;
+    cout << "Mes: " << endl;
+    cin >> mes;
+    cout << "Anio: " << endl;
+    cin >> anio;
+    DtFecha fechaIngreso = DtFecha(dia,mes,anio);
+    fechaIngreso.setAnio(anio);
+    fechaIngreso.setMes(mes);
+    fechaIngreso.setDia(dia);
+    dtMascota.setRacionDiaria(0);
+    Socio* socio= new Socio(ci,nombre,fechaIngreso);
     coleccionSocios.socio[coleccionSocios.topeU]=socio;
     coleccionSocios.topeU++;
 }
@@ -48,55 +58,52 @@ void registrarSocio(){
     float peso;
     bool vacunaCachorro;
     int menutipo,menugenero;
-    Genero genero:
-    DtGato dtgato;
-    DtPerro dtperro;
+    DtGato dtgato = DtGato();
+    DtPerro dtperro = DtPerro();
     
     // MENU DE LOS DATOS DEL SOCIO CI Y NOMBRE
-    cout << "_________________________________" << endl
-    cout << "Ingresar Socio" << endl
-    cout << "       Digitar Ci: " << endl
+    cout << "_________________________________" << endl;
+    cout << "Ingresar Socio" << endl;
+    cout << "       Digitar Ci: " << endl;
     cin >> ci; 
-    cout << "       Digitar Nombre: " << endl
+    cout << "       Digitar Nombre: " << endl;
     cin >> nombre;
     // noExisteSocio(ci); //Funcion a implementar que chequee si existe un socio
   
     // MENU PARA INGRESAR UNA MASCOTA
-    cout << "INGRESAR MASCOTA" << endl
-    cout << "Tipo:" << endl
-    cout << "1) Perro" << endl
-    cout << "2) Gato" << endl
+    cout << "INGRESAR MASCOTA" << endl;
+    cout << "Tipo:" << endl;
+    cout << "1) Perro" << endl;
+    cout << "2) Gato" << endl;
     cin >> menutipo;
-    cout << "Nombre" << endl
-    cin >> mnombre;
-    cout >> "Seleccionar genero:" << endl
-    cout >> "1) Hembra " >> endl
-    cout >> "2) Macho "  >> endl
-    cin >> menugenero
+    cout << "Nombre" << endl;
+    cout << "Seleccionar genero:" << endl;
+    cout << "1  ) Hembra " << endl;
+    cout << "2) Macho "  << endl;
+    cin >> menugenero ;
     switch(menugenero){
         case 1:
-            genero=Macho;
+            Genero genero=Macho;
         break;
         case 2:
-            genero=Hembra;
+            Genero genero1=Hembra;
         break;
-        default: cout << "Genero Invalido " << endl
+        default: cout << "Genero Invalido " << endl;
     }
 
-    cout >> "Peso de la mascota? : " << endls
+    cout >> "Peso de la mascota? : " << endl;
     cin >> peso;
     switch(menutipo){
         case 1: // En caso de que sea perro
-                RazaPerro razzaperro;
                 int menurazaperro;
-                cout << "1)Raza del perro;"
-                cout << "2)labrador"
-                cout << "3)ovejero"
-                cout << "4)bulldog"
-                cout << "5)pitbull"
-                cout << "6)collieo"
-                cout << "7)pekines"
-                cout << "8)otro"
+                cout << "1)Raza del perro;" << endl;
+                cout << "2)labrador" << endl;
+                cout << "3)ovejero" << endl;
+                cout << "4)bulldog" << endl;
+                cout << "5)pitbull" << endl;
+                cout << "6)collie" << endl;
+                cout << "7)pekines" << endl;
+                cout << "8)otro" << endl;
                 cin >> menurazaperro;
                 switch(menurazaperro){
                     case 1
@@ -115,10 +122,10 @@ void menu(){}
 void menu(){
     system("clear");
     cout << "_____________________________________" << endl;
-    cout << "Elija la Opcion:"
-    cout << "   1) Registrar Socio"
-    cout << "   2)Ingresar Consulta"
-    cout << "   0)Salir"
+    cout << "Elija la Opcion:" << endl;
+    cout << "   1) Registrar Socio" << endl;
+    cout << "   2)Ingresar Consulta" << endl;
+    cout << "   0)Salir" << endl;
 
 }
 

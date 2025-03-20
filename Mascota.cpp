@@ -4,7 +4,7 @@ using namespace std;
 
 Mascota::Mascota(){};
 
-Mascota::Mascota(string& nombre, Genero genero, float peso){
+Mascota::Mascota(string nombre, Genero genero, float peso){
     this->nombre = nombre;
     this->genero = genero;
     this->peso = peso;

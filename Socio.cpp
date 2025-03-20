@@ -39,8 +39,8 @@ Socio::~Socio() {
 }
 
 Consulta** Socio::obtenerConslta(int& cantSocios){
-    cantConsultas=this->topeConsultas,
-    retrun this->consulta;
+    int consultas=CANT_CONSULTAS;
+    consultas=this->topeConsultas;
+    return this->Consultas;
 }
-
-void Socio::eliminarConsultas(){}
+Consulta** Socio::eliminarConsulta(Consulta consulta){}

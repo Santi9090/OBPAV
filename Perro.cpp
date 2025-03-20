@@ -1,10 +1,10 @@
-#include <Perro.h>
+#include "Perro.h"
 
 using namespace std;
 
 Perro::Perro(): Mascota(){}
 
-Perro::Perro(string& nombre, Genero genero, float peso, float racionDiaria, RazaPerro raza, bool vacunaCachorro): Mascota(nombre, genero, peso, racionDiaria){
+Perro::Perro(string nombre, Genero genero, float peso, float racionDiaria, RazaPerro raza, bool vacunaCachorro): Mascota(nombre, genero, peso){
     this->raza = raza;
     this->vacunaCachorro = vacunaCachorro;
 }
@@ -28,5 +28,5 @@ void Perro::setVacunaCachorro(bool vacunaCachorro){
 Perro::~Perro(){}
 
 float Perro::obtenerRacionDiaria(){
-    return this->peso*0.025;
+    return this->getPeso()*0.025;
 }

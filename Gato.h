@@ -12,7 +12,7 @@ class Gato : public Mascota {
         TipoPelo tipoPelo;
     public:
         Gato();
-        Gato(string& nombre, Genero genero, float peso, float racionDiaria, TipoPelo tipoPelo);
+        Gato(string nombre, Genero genero, float peso, float racionDiaria, TipoPelo tipoPelo);
         void setTipoPelo(TipoPelo tipoPelo);
         TipoPelo getTipoPelo();
         ~Gato();
@@ -20,4 +20,4 @@ class Gato : public Mascota {
 };
 
 
-#endi   
+#endif

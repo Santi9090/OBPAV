@@ -10,18 +10,18 @@ Consulta::Consulta( DtFecha fechaConsulta, string motivo){
     this->motivo = "";
 }
 
-Consulta::setFechaConsulta(DtFecha fechaConsulta){ // Cambio de DtFecha a DtFecha creo que esta mal 
+void Consulta::setFechaConsulta(DtFecha fechaConsulta){ // Cambio de DtFecha a DtFecha creo que esta mal 
     this->fechaConsulta = fechaConsulta;
 }
 
-Consulta::getFechaConsulta(){
+DtFecha Consulta::getFechaConsulta(){   
     return this->fechaConsulta;
 }
 
-Consulta::getMotivo(){
+string Consulta::getMotivo(){
     return this->motivo;
 }
-Consulta::setMotivo(string motivo){
+void Consulta::setMotivo(string motivo){
     this->motivo= motivo;
 }
 
