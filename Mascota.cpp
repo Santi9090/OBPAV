@@ -30,7 +30,7 @@ float Mascota::getPeso(){
     return this->peso;
 };
 
-void Mascota::setPeso(float peso){    
+void Mascota::setPeso(float peso){
     this->peso = peso;
 };
 

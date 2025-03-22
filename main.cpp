@@ -155,8 +155,37 @@ int main(){
         }
         menu();
         cin >> menu;
-        
     }
-    
+
     return 0;
 };
+
+void eliminarSocio(string ci) {
+    int indice = -1;
+    for (int i = 0; i < coleccionSocios.topeU; i++) {
+        if (coleccionSocios.socio[i]->getCi() == ci) {
+            indice = i;
+            break;
+        }
+    }
+    if (indice == -1) {
+        throw invalid_argument("No existe un socio registrado con la cédula: " + ci);
+    }
+    Socio* socio = coleccionSocios.socio[indice];
+    int cantConsultas;
+    Consulta** consultas = socio->obtenerConslta(cantConsultas);
+    for (int i = 0; i < cantConsultas; i++) {
+        delete consultas[i];
+    }
+    for (int i = 0; i < CANT_MASCOTAS; i++) {
+        if (socio->Mascotas[i] != nullptr) {
+            delete socio->Mascotas[i];
+        }
+    }
+    delete socio;
+    for (int i = indice; i < coleccionSocios.topeU - 1; i++) {
+        coleccionSocios.socio[i] = coleccionSocios.socio[i + 1];
+    }
+    coleccionSocios.topeU--;
+    cout << "Socio con CI " << ci << " eliminado correctamente." << endl;
+}

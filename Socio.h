@@ -12,8 +12,8 @@ using namespace std; // Uso del espacio de nombres std
 
 class Socio
 {
-    private: 
-        string ci; 
+    private:
+        string ci;
         string Nombre;
         DtFecha fechaIngreso;
         Consulta* Consultas[CANT_CONSULTAS];

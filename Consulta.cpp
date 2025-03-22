@@ -14,7 +14,7 @@ void Consulta::setFechaConsulta(DtFecha fechaConsulta){ // Cambio de DtFecha a D
     this->fechaConsulta = fechaConsulta;
 }
 
-DtFecha Consulta::getFechaConsulta(){   
+DtFecha Consulta::getFechaConsulta(){
     return this->fechaConsulta;
 }
 
