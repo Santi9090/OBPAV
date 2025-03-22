@@ -21,7 +21,7 @@ public:
     void setNombre(const string& nombre);
     void setGenero(Genero genero);
     void setPeso(float peso);
-    void setRacionDiaria(float racionDiaria);
+    virtual void setRacionDiaria(float racionDiaria);
     ~DtMascota();
 };
 
