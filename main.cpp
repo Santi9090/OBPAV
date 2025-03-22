@@ -11,8 +11,8 @@
 #include "Mascota.h"
 #include "Perro.h"
 #include "Gato.h"
-#define MAX_SOCIOS 999
-
+#define MAX_SOCIOS 10
+#include <unistd.h>
 using namespace std;
 
 // TODOS LOS SOCIOS DEL SISTEMA
@@ -35,7 +35,7 @@ struct
 // OPERACION F
 // DtMascota  obtenerMascotas(string ci, int& cantMascotas){}
 
-void registrarSocio(string ci, string nombre, DtMascota& mascota)
+void registrarSocio(string ci, string nombre, DtMascota &mascota)
 {
     int dia, mes, anio;
     cout << "Ingresar Fecha de Ingreso" << endl;
@@ -51,18 +51,32 @@ void registrarSocio(string ci, string nombre, DtMascota& mascota)
     fechaIngreso.setDia(dia);
     Socio *socio = new Socio(ci, nombre, fechaIngreso);
     coleccionSocios.socio[coleccionSocios.topeU] = socio;
-    coleccionSocios.topeU++;
-
-    try{
-        DtPerro& dtperro = dynamic_cast<DtPerro&>(mascota);
-        Perro* perro = new Perro(dtperro.getNombre(),dtperro.getGenero(),dtperro.getPeso(),dtperro.getRacionDiaria(),dtperro.getRaza(),dtperro.getVacunaCachorro());
-    }catch(bad_cast){
-        try{
-
-        }catch(bad_cast){}
+    coleccionSocios.socio[coleccionSocios.topeU]->setTopeConsultas(0);
+    coleccionSocios.socio[coleccionSocios.topeU]->setTopeMascotas(0);
+    try
+    {
+        cout << "entro al try" << endl;
+        DtPerro &dtperro = dynamic_cast<DtPerro &>(mascota);
+        Perro *perro = new Perro(dtperro.getNombre(), dtperro.getGenero(), dtperro.getPeso(), dtperro.getRacionDiaria(), dtperro.getRaza(), dtperro.getVacunaCachorro());
+        coleccionSocios.socio[coleccionSocios.topeU]->setMascota(perro);
+        cout << "Mascota añadida: " << perro->getNombre() << " al socio " << nombre << endl;
+        sleep(3);
+        
     }
-
-
+    catch (bad_cast)
+    {
+        try
+        {
+            DtGato &dtgato = dynamic_cast<DtGato &>(mascota);
+            Gato *gato = new Gato(dtgato.getNombre(), dtgato.getGenero(), dtgato.getPeso(), dtgato.getRacionDiaria(), dtgato.getTipoPelo());
+            cout << "Mascota añadida: " << gato->getNombre() << " al socio " << nombre << endl;
+            sleep(3);
+        }
+        catch (bad_cast)
+        {
+        }
+    }
+    coleccionSocios.topeU++;
 }
 void registrarSocio()
 {
@@ -94,8 +108,11 @@ void registrarSocio()
     cout << "2) Gato" << endl;
     cin >> menutipo;
 
+    // DIGITAR NOMBRE DE LA MASCOTA
+    cout << "Nombre de la Mascota" << endl;
+    cin >> mnombre;
+
     // MENU PARA SELECCIONAR GENERO
-    cout << "Nombre" << endl;
     cout << "Seleccionar genero:" << endl;
     cout << "1) Hembra " << endl;
     cout << "2) Macho " << endl;
@@ -189,26 +206,27 @@ void registrarSocio()
     case 2:
     { // En caso de que sea gato
         int menutipopelo;
-        cout << "Seleccionar tipo de pelo: " << endl;
-        cout << "1-Corto" << endl;
-        cout << "2-Mediano" << endl;
-        cout << "3-Largo" << endl;
-
         do
         {
-            if (menutipopelo== 1)
-                    tipopelo=Corto;
-            else if (menutipopelo== 2)
-                    tipopelo=Mediano;
-            else if (menutipopelo== 3)
-                    tipopelo=Largo;
+            cout << "Seleccionar tipo de pelo: " << endl;
+            cout << "1-Corto" << endl;
+            cout << "2-Mediano" << endl;
+            cout << "3-Largo" << endl;
+            cin >> menutipopelo;
+
+            if (menutipopelo == 1)
+                tipopelo = Corto;
+            else if (menutipopelo == 2)
+                tipopelo = Mediano;
+            else if (menutipopelo == 3)
+                tipopelo = Largo;
             else
-            cout << "INVALIDO " << endl;
+                cout << "INVALIDO " << endl;
 
         } while (menutipopelo != 1 && menutipopelo != 2 && menutipopelo != 3);
 
-        DtGato dtgato= DtGato(mnombre,genero,peso,0,tipopelo);
-        registrarSocio(ci,nombre,dtgato);
+        DtGato dtgato = DtGato(mnombre, genero, peso, 0, tipopelo);
+        registrarSocio(ci, nombre, dtgato);
         break;
     }
     default:
@@ -216,7 +234,7 @@ void registrarSocio()
         break;
     }
 }
-
+// FUNCIONES AUXILIARES
 void menu()
 {
     system("clear");
@@ -224,21 +242,59 @@ void menu()
     cout << "Elija la Opcion:" << endl;
     cout << "   1) Registrar Socio" << endl;
     cout << "   2)Ingresar Consulta" << endl;
+    cout << "   9)Mostrar Socios" << endl;
     cout << "   0)Salir" << endl;
 }
+
+void mostrarSocios()
+{
+    for (int i = 0; i < coleccionSocios.topeU; i++)
+    {
+        cout << coleccionSocios.socio[i]->getNombre() << endl;
+    }
+    sleep(3);
+}
+
+void mostrarMascotas()
+{
+    for (int i = 0; i < coleccionSocios.topeU; i++)
+    {
+        cout << "   Usuario: " << coleccionSocios.socio[i]->getNombre() << endl;
+
+        int topeMascotas = coleccionSocios.socio[i]->getTopeMascotas();
+        Mascota **mascotas = coleccionSocios.socio[i]->getMascotas();
+
+        cout << "   Total de Mascotas: " << topeMascotas << endl;
+
+        if (topeMascotas == 0)
+        {
+            cout << "   (Este usuario no tiene mascotas)" << endl;
+        }
+        else
+        {
+            for (int j = 0; j < topeMascotas; j++)
+            {
+                cout << "     Mascota #" << (j + 1) << ": " << mascotas[j]->getNombre() << endl;
+            }
+        }
+    }
+    sleep(10);
+}
+    
+
 
 int main()
 {
     menu();
     coleccionSocios.topeU = 0;
-    int menu;
-    cin >> menu;
-    while (menu != 0)
+    int menu1;
+    cin >> menu1;
+    while (menu1 != 0)
     {
-        switch (menu)
+        switch (menu1)
         {
         case 1:
-        registrarSocio();
+            registrarSocio();
             break;
         case 2:
             break;
@@ -248,13 +304,20 @@ int main()
             break;
         case 5:
             break;
+        case 9:
+            mostrarSocios();
+            break;
+        case 10:
+            mostrarMascotas();
+            break;
         case 0:
             cout << "SALIENDO..." << endl;
             break;
         default:
             cout << "OPCION INVALIDA" << endl;
         }
-        cin >> menu;
+        menu();
+        cin >> menu1;
     }
 
     return 0;

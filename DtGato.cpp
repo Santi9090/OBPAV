@@ -4,7 +4,7 @@
 using namespace std;
 
 DtGato::DtGato() {}
-DtGato::DtGato(const string& nombre, Genero genero, float peso, float racionDiaria, TipoPelo tipoPelo)
+DtGato::DtGato(string nombre, Genero genero, float peso, float racionDiaria, TipoPelo tipoPelo)
     : DtMascota(nombre, genero, peso, racionDiaria), tipoPelo(tipoPelo) {}
 
 TipoPelo DtGato::getTipoPelo() const {

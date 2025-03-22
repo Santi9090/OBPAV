@@ -12,27 +12,38 @@ using namespace std; // Uso del espacio de nombres std
 
 class Socio
 {
-    private:
-        string ci;
-        string Nombre;
-        DtFecha fechaIngreso;
-        Consulta* Consultas[CANT_CONSULTAS];
-        int topeConsultas;
-        Mascota* Mascotas[CANT_MASCOTAS];
-        int topeMascotas;
-    public:
-        Socio();
-        Socio(string ci, string Nombre, DtFecha fechaIngreso);
-        void setCi(string ci);
-        string getCi();
-        void setNombre(string Nombre);
-        string getNombre();
-        void setFechaIngreso(DtFecha fechaIngreso);
-        DtFecha getFechaIngreso();
-        void agregarConsulta(Consulta*);
-        ~Socio();
-        Consulta** obtenerConsulta(int&);
-        Consulta** eliminarConsulta(Consulta consulta);
+private:
+    string ci;
+    string Nombre;
+    DtFecha fechaIngreso;
+    Consulta *Consultas[CANT_CONSULTAS];
+    int topeConsultas;
+    Mascota *Mascotas[CANT_MASCOTAS];
+    int topeMascotas;
+
+public:
+    Socio();
+    Socio(string ci, string Nombre, DtFecha fechaIngreso);
+    void setCi(string ci);
+    string getCi();
+    void setNombre(string Nombre);
+    string getNombre();
+    void setFechaIngreso(DtFecha fechaIngreso);
+    DtFecha getFechaIngreso();
+    void agregarConsulta(Consulta *);
+    void setMascota(Mascota *mascota);
+
+    void setTopeConsultas(int tope);
+    int getTopeConsultas();
+
+    void setTopeMascotas(int tope);
+    int getTopeMascotas();
+
+    Mascota **getMascotas();
+
+    ~Socio();
+    Consulta **obtenerConsulta(int &);
+    Consulta **eliminarConsulta(Consulta consulta);
 };
 
 #endif // SOCIO_H

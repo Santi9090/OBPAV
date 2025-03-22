@@ -10,7 +10,7 @@ private:
     TipoPelo tipoPelo;
 public:
     DtGato();
-    DtGato(const string& nombre, Genero genero, float peso, float racionDiaria, TipoPelo tipoPelo);
+    DtGato(string nombre, Genero genero, float peso, float racionDiaria, TipoPelo tipoPelo);
     TipoPelo getTipoPelo() const;
     void setTipoPelo(TipoPelo tipoPelo);
     ~DtGato();
