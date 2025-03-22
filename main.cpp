@@ -142,6 +142,7 @@ void menu()
 
 int main()
 {
+    menu();
     coleccionSocios.topeU = 0;
     int menu;
     cin >> menu;
