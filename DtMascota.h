@@ -13,7 +13,7 @@ private:
 
 public:
     DtMascota();
-    DtMascota(const string& nombre, Genero genero, float peso, float racionDiaria);
+    DtMascota(string nombre, Genero genero, float peso, float racionDiaria);
     string getNombre() const;
     Genero getGenero() const;
     float getPeso() const;

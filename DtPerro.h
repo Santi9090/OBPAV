@@ -11,9 +11,9 @@ private:
 
 public:
     DtPerro();
-    DtPerro(const string& nombre,Genero genero, float peso, float racionDiaria, RazaPerro raza, bool vacunaCachorro);
-    RazaPerro getRaza() const;
-    bool getVacunaCachorro() const;
+    DtPerro(string nombre,Genero genero, float peso, float racionDiaria, RazaPerro raza, bool vacunaCachorro);
+    RazaPerro getRaza();
+    bool getVacunaCachorro();
     void setRaza(RazaPerro raza);
     void setVacunaCachorro(bool vacunaCachorro);
     ~DtPerro();

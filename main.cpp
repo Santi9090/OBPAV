@@ -8,6 +8,9 @@
 #include "Genero.h"
 #include "DtPerro.h"
 #include "DtGato.h"
+#include "Mascota.h"
+#include "Perro.h"
+#include "Gato.h"
 #define MAX_SOCIOS 999
 
 using namespace std;
@@ -32,7 +35,7 @@ struct
 // OPERACION F
 // DtMascota  obtenerMascotas(string ci, int& cantMascotas){}
 
-void registrarSocio(string ci, string nombre, DtMascota& dtMascota)
+void registrarSocio(string ci, string nombre, DtMascota& mascota)
 {
     int dia, mes, anio;
     cout << "Ingresar Fecha de Ingreso" << endl;
@@ -46,21 +49,34 @@ void registrarSocio(string ci, string nombre, DtMascota& dtMascota)
     fechaIngreso.setAnio(anio);
     fechaIngreso.setMes(mes);
     fechaIngreso.setDia(dia);
-    dtMascota.setRacionDiaria(0);
     Socio *socio = new Socio(ci, nombre, fechaIngreso);
     coleccionSocios.socio[coleccionSocios.topeU] = socio;
     coleccionSocios.topeU++;
+
+    try{
+        DtPerro& dtperro = dynamic_cast<DtPerro&>(mascota);
+        Perro* perro = new Perro(dtperro.getNombre(),dtperro.getGenero(),dtperro.getPeso(),dtperro.getRacionDiaria(),dtperro.getRaza(),dtperro.getVacunaCachorro());
+    }catch(bad_cast){
+        try{
+
+        }catch(bad_cast){}
+    }
+
+
 }
 void registrarSocio()
 {
 
     // DECLARACION DE LAS VARIABLES UTILIZADAS
-    string ci, nombre, mnombre, genero, raza;
+    string ci, nombre, mnombre, raza;
     float peso;
-    bool vacunaCachorro;
+    bool vacunaCachorro = true;
     int menutipo, menugenero;
     DtGato dtgato = DtGato();
     DtPerro dtperro = DtPerro();
+    Genero genero;
+    RazaPerro razaperro;
+    TipoPelo tipopelo;
 
     // MENU DE LOS DATOS DEL SOCIO CI Y NOMBRE
     cout << "_________________________________" << endl;
@@ -77,31 +93,38 @@ void registrarSocio()
     cout << "1) Perro" << endl;
     cout << "2) Gato" << endl;
     cin >> menutipo;
+
+    // MENU PARA SELECCIONAR GENERO
     cout << "Nombre" << endl;
     cout << "Seleccionar genero:" << endl;
     cout << "1) Hembra " << endl;
     cout << "2) Macho " << endl;
     cin >> menugenero;
-    switch (menugenero)
+    do
     {
-    case 1:
-    {
-        Genero genero = Macho;
-        break;
-    }
-    case 2:
-    {
-        Genero genero1 = Hembra;
-        break;
-    }
-    default:
-        cout << "Genero Invalido " << endl;
-    }
+        if (menugenero == 1)
+        {
+            genero = Macho;
+        }
+        else if (menugenero == 2)
+        {
+            genero = Hembra;
+        }
+        else
+        {
+            cout << "Invalido " << endl;
+        }
+    } while (menugenero != 1 && menugenero != 2);
+
+    // MENU PARA SELECCIONAR PESO DE LA MASCOTA
     cout << "Peso de la mascota? : " << endl;
     cin >> peso;
+
+    // SWITCH QUE DEPENDE DE SI ES PERRO O GATO
     switch (menutipo)
     {
-    case 1: { // En caso de que sea perro
+    case 1:
+    { // En caso de que sea perro
         int menurazaperro;
         cout << "1)Raza del perro;" << endl;
         cout << "2)labrador" << endl;
@@ -112,21 +135,85 @@ void registrarSocio()
         cout << "7)pekines" << endl;
         cout << "8)otro" << endl;
         cin >> menurazaperro;
+
         switch (menurazaperro)
         {
         case 1:
-            break;
-            default :
+        {
+            razaperro = labrador;
             break;
         }
+        case 2:
+        {
+            razaperro = labrador;
+            break;
+        }
+        case 3:
+        {
+            razaperro = ovejero;
+            break;
+        }
+        case 4:
+        {
+            razaperro = bulldog;
+            break;
+        }
+        case 5:
+        {
+            razaperro = pitbull;
+            break;
+        }
+        case 6:
+        {
+            razaperro = collie;
+            break;
+        }
+        case 7:
+        {
+            razaperro = pekines;
+            break;
+        }
+        case 8:
+        {
+            razaperro = otro;
+        }
+        default:
+            cout << "Raza Invalid" << endl;
+            break;
+        }
+        DtPerro dtperro = DtPerro(mnombre, genero, peso, 0, razaperro, vacunaCachorro);
 
+        registrarSocio(ci, nombre, dtperro);
         break;
     }
-    case 2: { // En caso de que sea gato
+    case 2:
+    { // En caso de que sea gato
+        int menutipopelo;
+        cout << "Seleccionar tipo de pelo: " << endl;
+        cout << "1-Corto" << endl;
+        cout << "2-Mediano" << endl;
+        cout << "3-Largo" << endl;
+
+        do
+        {
+            if (menutipopelo== 1)
+                    tipopelo=Corto;
+            else if (menutipopelo== 2)
+                    tipopelo=Mediano;
+            else if (menutipopelo== 3)
+                    tipopelo=Largo;
+            else
+            cout << "INVALIDO " << endl;
+
+        } while (menutipopelo != 1 && menutipopelo != 2 && menutipopelo != 3);
+
+        DtGato dtgato= DtGato(mnombre,genero,peso,0,tipopelo);
+        registrarSocio(ci,nombre,dtgato);
         break;
     }
     default:
-    break;
+        cout << "INVALIDO" << endl;
+        break;
     }
 }
 
@@ -151,6 +238,7 @@ int main()
         switch (menu)
         {
         case 1:
+        registrarSocio();
             break;
         case 2:
             break;
@@ -196,9 +284,9 @@ void eliminarSocio(string ci)
     }
     for (int i = 0; i < CANT_MASCOTAS; i++)
     {
-        //if (socio.getmascota[i] != nullptr)
+        // if (socio.getmascota[i] != nullptr)
         {
-          //  delete socio->topeMascotas[i];
+            //  delete socio->topeMascotas[i];
         }
     }
     delete socio;

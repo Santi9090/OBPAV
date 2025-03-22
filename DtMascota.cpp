@@ -5,7 +5,7 @@
 using namespace std;
 
 DtMascota::DtMascota() {}
-DtMascota::DtMascota(const string& nombre, Genero genero, float peso, float racionDiaria) {
+DtMascota::DtMascota(string nombre, Genero genero, float peso, float racionDiaria) {
     this->nombre = nombre;
     this->genero = genero;
     this->peso = peso;
