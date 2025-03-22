@@ -3,7 +3,6 @@
 
 #include "DtMascota.h"
 #include "RazaPerro.h"
-#include "Genero.h"
 
 class DtPerro : public DtMascota {
 private:

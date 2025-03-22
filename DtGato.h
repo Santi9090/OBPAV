@@ -3,7 +3,6 @@
 
 #include "DtMascota.h"
 #include "TipoPelo.h"
-#include "Genero.h"
 using namespace std;
 
 class DtGato : public DtMascota {

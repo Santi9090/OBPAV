@@ -31,7 +31,7 @@ class Socio
         DtFecha getFechaIngreso();
         void agregarConsulta(Consulta*);
         ~Socio();
-        Consulta** obtenerConslta(int&);
+        Consulta** obtenerConsulta(int&);
         Consulta** eliminarConsulta(Consulta consulta);
 };
 

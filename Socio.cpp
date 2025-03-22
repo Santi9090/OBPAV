@@ -38,7 +38,7 @@ Socio::~Socio() {
     // Aquí podrías liberar recursos si fuera necesario, pero no es obligatorio en este caso
 }
 
-Consulta** Socio::obtenerConslta(int& cantSocios){
+Consulta** Socio::obtenerConsulta(int& cantSocios){
     int consultas=CANT_CONSULTAS;
     consultas=this->topeConsultas;
     return this->Consultas;

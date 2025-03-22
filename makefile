@@ -1,5 +1,5 @@
-main: DtConsulta.o DtFecha.o Socio.o Gato.o Perro.o Mascota.o Consulta.o  main.o 
-	g++ DtConsulta.o DtFecha.o  Socio.o  Gato.o Perro.o Mascota.o Consulta.o main.o -o exec
+main: DtConsulta.o DtFecha.o DtGato.o DtPerro.o DtMascota.o Gato.o Perro.o Mascota.o Consulta.o Socio.o main.o 
+	g++ DtConsulta.o DtFecha.o DtGato.o DtPerro.o DtMascota.o  Gato.o Perro.o Mascota.o Consulta.o Socio.o main.o -o exec
 main.o: main.cpp
 
 DtConsulta.o: DtConsulta.cpp
@@ -8,15 +8,15 @@ DtFecha.o: DtFecha.cpp
 
 DtGato.o: DtGato.cpp
 
-DtMascota.o: DtMascota.cpp
-
 DtPerro.o: DtPerro.cpp
+
+DtMascota.o: DtMascota.cpp
 
 Gato.o: Gato.cpp
 
-Mascota.o: Mascota.cpp
-
 Perro.o: Perro.cpp
+
+Mascota.o: Mascota.cpp
 
 Consulta.o: Consulta.cpp
 
