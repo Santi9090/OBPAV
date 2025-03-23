@@ -61,7 +61,6 @@ void registrarSocio(string ci, string nombre, DtMascota &mascota)
         coleccionSocios.socio[coleccionSocios.topeU]->setMascota(perro);
         cout << "Mascota añadida: " << perro->getNombre() << " al socio " << nombre << endl;
         sleep(3);
-        
     }
     catch (bad_cast)
     {
@@ -70,6 +69,8 @@ void registrarSocio(string ci, string nombre, DtMascota &mascota)
             DtGato &dtgato = dynamic_cast<DtGato &>(mascota);
             Gato *gato = new Gato(dtgato.getNombre(), dtgato.getGenero(), dtgato.getPeso(), dtgato.getRacionDiaria(), dtgato.getTipoPelo());
             cout << "Mascota añadida: " << gato->getNombre() << " al socio " << nombre << endl;
+            coleccionSocios.socio[coleccionSocios.topeU]->setMascota(gato);
+
             sleep(3);
         }
         catch (bad_cast)
@@ -143,14 +144,15 @@ void registrarSocio()
     case 1:
     { // En caso de que sea perro
         int menurazaperro;
-        cout << "1)Raza del perro;" << endl;
-        cout << "2)labrador" << endl;
-        cout << "3)ovejero" << endl;
-        cout << "4)bulldog" << endl;
-        cout << "5)pitbull" << endl;
-        cout << "6)collie" << endl;
-        cout << "7)pekines" << endl;
-        cout << "8)otro" << endl;
+        
+        cout << "Raza del perro:" << endl;
+        cout << "1)labrador" << endl;
+        cout << "2)ovejero" << endl;
+        cout << "3)bulldog" << endl;
+        cout << "4)pitbull" << endl;
+        cout << "5)collie" << endl;
+        cout << "6)pekines" << endl;
+        cout << "7)otro" << endl;
         cin >> menurazaperro;
 
         switch (menurazaperro)
@@ -162,35 +164,30 @@ void registrarSocio()
         }
         case 2:
         {
-            razaperro = labrador;
+            razaperro = ovejero;
             break;
         }
         case 3:
         {
-            razaperro = ovejero;
+            razaperro = bulldog;
             break;
         }
         case 4:
         {
-            razaperro = bulldog;
+            razaperro = pitbull;
             break;
         }
         case 5:
         {
-            razaperro = pitbull;
+            razaperro = collie;
             break;
         }
         case 6:
         {
-            razaperro = collie;
-            break;
-        }
-        case 7:
-        {
             razaperro = pekines;
             break;
         }
-        case 8:
+        case 7:
         {
             razaperro = otro;
         }
@@ -240,9 +237,10 @@ void menu()
     system("clear");
     cout << "_____________________________________" << endl;
     cout << "Elija la Opcion:" << endl;
-    cout << "   1) Registrar Socio" << endl;
+    cout << "   1)Registrar Socio" << endl;
     cout << "   2)Ingresar Consulta" << endl;
     cout << "   9)Mostrar Socios" << endl;
+    cout << "   10)Mostrar Socios" << endl;
     cout << "   0)Salir" << endl;
 }
 
@@ -259,29 +257,30 @@ void mostrarMascotas()
 {
     for (int i = 0; i < coleccionSocios.topeU; i++)
     {
-        cout << "   Usuario: " << coleccionSocios.socio[i]->getNombre() << endl;
+        // Mostrar el nombre del socio
+        cout << "Usuario: " << coleccionSocios.socio[i]->getNombre() << endl;
 
+        // Obtener las mascotas del socio
         int topeMascotas = coleccionSocios.socio[i]->getTopeMascotas();
         Mascota **mascotas = coleccionSocios.socio[i]->getMascotas();
 
-        cout << "   Total de Mascotas: " << topeMascotas << endl;
-
+        // Verificar si el socio tiene mascotas
         if (topeMascotas == 0)
         {
-            cout << "   (Este usuario no tiene mascotas)" << endl;
+            cout << "   Este usuario no tiene mascotas." << endl;
         }
         else
         {
+            cout << "   Mascotas:" << endl;
             for (int j = 0; j < topeMascotas; j++)
             {
-                cout << "     Mascota #" << (j + 1) << ": " << mascotas[j]->getNombre() << endl;
+                // Mostrar el nombre de cada mascota
+                cout << "     - " << mascotas[j]->getNombre() << endl;
             }
         }
     }
-    sleep(10);
+    sleep(3); // Pausa para que el usuario pueda leer la información
 }
-    
-
 
 int main()
 {

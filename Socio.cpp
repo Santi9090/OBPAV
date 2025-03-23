@@ -71,7 +71,7 @@ int Socio::getTopeConsultas(){
 }
 
 void Socio::setTopeMascotas(int tope){
-    this->topeMascotas;
+    this->topeMascotas=tope;
 }
 int Socio::getTopeMascotas(){
     return this->topeMascotas;
