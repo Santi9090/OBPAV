@@ -1,24 +1,43 @@
 {
   "version": "0.2.0",
   "configurations": [
-      {
-          "name": "Debug C program",
-          "type": "cppdbg",
-          "request": "launch",
-          "program": "${workspaceFolder}/exec",
-          "args": [],
-          "stopAtEntry": true,
-          "cwd": "${workspaceFolder}",
-          "environment": [],
-          "externalConsole": false,
-          "MIMode": "gdb",
-          "setupCommands": [
-              {
-                  "description": "Enable pretty-printing for gdb",
-                  "text": "-enable-pretty-printing",
-                  "ignoreFailures": true
-              }
-          ]
-      }
+    {
+      "name": "Debug C program",
+      "type": "cppdbg",
+      "request": "launch",
+      "program": "${workspaceFolder}/exec",
+      "args": [],
+      "stopAtEntry": true,
+      "cwd": "${workspaceFolder}",
+      "environment": [],
+      "externalConsole": false,
+      "MIMode": "gdb",
+      "setupCommands": [
+        {
+          "description": "Enable pretty-printing for gdb",
+          "text": "-enable-pretty-printing",
+          "ignoreFailures": true
+        }
+      ]
+    },
+    {
+      "name": "C/C++ Runner: Debug Session",
+      "type": "cppdbg",
+      "request": "launch",
+      "args": [],
+      "stopAtEntry": false,
+      "externalConsole": true,
+      "cwd": "c:/Users/sgarcia/Documents/GitHub/OBPAV",
+      "program": "c:/Users/sgarcia/Documents/GitHub/OBPAV/build/Debug/outDebug",
+      "MIMode": "gdb",
+      "miDebuggerPath": "gdb",
+      "setupCommands": [
+        {
+          "description": "Enable pretty-printing for gdb",
+          "text": "-enable-pretty-printing",
+          "ignoreFailures": true
+        }
+      ]
+    }
   ]
 }
