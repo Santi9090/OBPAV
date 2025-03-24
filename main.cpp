@@ -35,6 +35,18 @@ struct
 // OPERACION F
 // DtMascota  obtenerMascotas(string ci, int& cantMascotas){}
 
+bool existesocio(string ci)
+{
+    for (int i = 0; i < coleccionSocios.topeU; i++)
+    {
+        if (coleccionSocios.socio[i]->getCi() == ci)
+        {
+            return true;
+        }
+    }
+    return false;
+}
+
 void registrarSocio(string ci, string nombre, DtMascota &mascota)
 {
     int dia, mes, anio;
@@ -98,7 +110,7 @@ void registrarSocio()
     cout << "Ingresar Socio" << endl;
     cout << "       Digitar Ci: " << endl;
     cin >> ci;
-    cout << "       Digitar Nombre: " << endl;
+    cout << "       Ingresar Nombre: " << endl;
     cin >> nombre;
     // noExisteSocio(ci); //Funcion a implementar que chequee si existe un socio
 
@@ -247,18 +259,6 @@ void registrarSocio()
     }
 }
 
-bool existesocio(string ci)
-{
-    for (int i = 0; i < coleccionSocios.topeU; i++)
-    {
-        if (coleccionSocios.socio[i]->getCi() == ci)
-        {
-            return true;
-        }
-    }
-    return false;
-}
-// FUNCIONES AUXILIARES
 void agregarMascota(string ci, DtMascota &dtMascota)
 {
     int f;
@@ -299,15 +299,8 @@ void agregarMascota(string ci, DtMascota &dtMascota)
     else
     {
         cout << "NO EXISTE EL SOCIO" << endl;
+        sleep(3);
     }
-}
-
-bool existesocio(string ci)
-{
-    for (int i = 0; i < coleccionSocios.topeU; i++)
-        if (coleccionSocios.socio[i]->getCi() == ci)
-            return true;
-    return false;
 }
 
 void agregarMascota()
@@ -329,7 +322,6 @@ void agregarMascota()
     cout << "Socio A ingresar Mascota  " << endl;
     cout << "       Digitar Ci: " << endl;
     cin >> ci;
-    // noExisteSocio(ci); //Funcion a implementar que chequee si existe un socio
     if (existesocio(ci))
     {
         // MENU PARA INGRESAR UNA MASCOTA
@@ -481,6 +473,94 @@ void agregarMascota()
         cout << "NO EXISTE EL SOCIO" << endl;
     }
 }
+
+void ingresarConsulta(string motivo, string ci)
+{
+    // CREAR DTFECHA
+    int dia, mes, anio;
+    cout << "Ingresar Fecha de Ingreso" << endl;
+    cout << "Dia: " << endl;
+    cin >> dia;
+    cout << "Mes: " << endl;
+    cin >> mes;
+    cout << "Año: " << endl;
+    cin >> anio;
+    DtFecha fechaIngreso = DtFecha(dia, mes, anio);
+    fechaIngreso.setAnio(anio);
+    fechaIngreso.setMes(mes);
+    fechaIngreso.setDia(dia);
+
+    Consulta *consulta = new Consulta(fechaIngreso, motivo);
+    for (int i = 0; i < coleccionSocios.topeU; i++)
+    {
+        if (coleccionSocios.socio[i]->getCi() == ci)
+        {
+            coleccionSocios.socio[i]->setConsulta(consulta);
+            cout << "Consulta añadida al socio " << coleccionSocios.socio[i]->getNombre() << endl;
+            sleep(3);
+        }
+    }
+}
+
+void ingresarConsulta()
+{
+    string ci, motivo;
+    // MENU DE LOS DATOS DEL SOCIO CI Y NOMBRE
+    cout << "_________________________________" << endl;
+    cout << "Ingresar Socio" << endl;
+    cout << "       Digitar Ci: " << endl;
+    cin >> ci;
+    if (existesocio(ci))
+    {
+        cout << "Ingresar  Motivo: " << endl;
+        cin >> motivo;
+        ingresarConsulta(motivo, ci);
+    }
+    else
+    {
+        cout << "NO EXISTE EL SOCIO" << endl;
+    }
+}
+
+void eliminarSocio(string ci)
+{
+    int indice = -1;
+    for (int i = 0; i < coleccionSocios.topeU; i++)
+    {
+        if (coleccionSocios.socio[i]->getCi() == ci)
+        {
+            indice = i;
+            break;
+        }
+    }
+    if (indice == -1)
+    {
+        throw invalid_argument("No existe un socio registrado con la cédula: " + ci);
+    }
+    Socio *socio = coleccionSocios.socio[indice];
+    int cantConsultas;
+    Consulta **consultas = socio->obtenerConsulta(cantConsultas);
+    for (int i = 0; i < cantConsultas; i++)
+    {
+        delete consultas[i];
+    }
+    for (int i = 0; i < CANT_MASCOTAS; i++)
+    {
+        // if (socio.getmascota[i] != nullptr)
+        {
+            //  delete socio->topeMascotas[i];
+        }
+    }
+    delete socio;
+    for (int i = indice; i < coleccionSocios.topeU - 1; i++)
+    {
+        coleccionSocios.socio[i] = coleccionSocios.socio[i + 1];
+    }
+    coleccionSocios.topeU--;
+    cout << "Socio con CI " << ci << " eliminado correctamente." << endl;
+}
+// FUNCIONES AUXILIARES
+
 void menu()
 {
     system("clear");
@@ -550,6 +630,7 @@ int main()
             agregarMascota();
             break;
         case 3:
+            ingresarConsulta();
             break;
         case 4:
             break;
@@ -573,41 +654,3 @@ int main()
 
     return 0;
 };
-
-void eliminarSocio(string ci)
-{
-    int indice = -1;
-    for (int i = 0; i < coleccionSocios.topeU; i++)
-    {
-        if (coleccionSocios.socio[i]->getCi() == ci)
-        {
-            indice = i;
-            break;
-        }
-    }
-    if (indice == -1)
-    {
-        throw invalid_argument("No existe un socio registrado con la cédula: " + ci);
-    }
-    Socio *socio = coleccionSocios.socio[indice];
-    int cantConsultas;
-    Consulta **consultas = socio->obtenerConsulta(cantConsultas);
-    for (int i = 0; i < cantConsultas; i++)
-    {
-        delete consultas[i];
-    }
-    for (int i = 0; i < CANT_MASCOTAS; i++)
-    {
-        // if (socio.getmascota[i] != nullptr)
-        {
-            //  delete socio->topeMascotas[i];
-        }
-    }
-    delete socio;
-    for (int i = indice; i < coleccionSocios.topeU - 1; i++)
-    {
-        coleccionSocios.socio[i] = coleccionSocios.socio[i + 1];
-    }
-    coleccionSocios.topeU--;
-    cout << "Socio con CI " << ci << " eliminado correctamente." << endl;
-}

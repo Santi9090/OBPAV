@@ -30,8 +30,15 @@ public:
     string getNombre();
     void setFechaIngreso(DtFecha fechaIngreso);
     DtFecha getFechaIngreso();
-    void agregarConsulta(Consulta *);
+    
     void setMascota(Mascota *mascota);
+    Mascota *getMascota(int posicion);
+
+    void setConsulta(Consulta * consulta);
+    Consulta *getConsulta(int posicion);
+
+    Consulta **getConsultas();
+    Mascota **getMascotas();
 
     void setTopeConsultas(int tope);
     int getTopeConsultas();
@@ -39,7 +46,7 @@ public:
     void setTopeMascotas(int tope);
     int getTopeMascotas();
 
-    Mascota **getMascotas();
+    
 
     ~Socio();
     Consulta **obtenerConsulta(int &);

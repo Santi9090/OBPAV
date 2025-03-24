@@ -6,8 +6,8 @@ using namespace std;
 
 Consulta::Consulta(){}
 Consulta::Consulta( DtFecha fechaConsulta, string motivo){
-    this->fechaConsulta = DtFecha();
-    this->motivo = "";
+    this->fechaConsulta = fechaConsulta;
+    this->motivo = motivo;
 }
 
 void Consulta::setFechaConsulta(DtFecha fechaConsulta){ // Cambio de DtFecha a DtFecha creo que esta mal 
