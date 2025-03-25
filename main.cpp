@@ -35,6 +35,8 @@ struct
 // OPERACION F
 // DtMascota  obtenerMascotas(string ci, int& cantMascotas){}
 
+
+// FUNCIONES AUXIALIARES
 bool existesocio(string ci)
 {
     for (int i = 0; i < coleccionSocios.topeU; i++)
@@ -47,6 +49,22 @@ bool existesocio(string ci)
     return false;
 }
 
+bool consultaslibres(string ci)
+{
+    for (size_t i = 0; i < coleccionSocios.topeU; i++)
+    {
+        if (coleccionSocios.socio[i]->getCi() == ci && coleccionSocios.socio[i]->getTopeConsultas() <= CANT_CONSULTAS)
+        {
+            return true;
+        }
+    }
+    return false;
+}
+
+
+
+
+// OPERACIONES OPERACION A
 void registrarSocio(string ci, string nombre, DtMascota &mascota)
 {
     int dia, mes, anio;
@@ -259,6 +277,7 @@ void registrarSocio()
     }
 }
 
+// OPERACIONES OPERACION B
 void agregarMascota(string ci, DtMascota &dtMascota)
 {
     int f;
@@ -474,6 +493,8 @@ void agregarMascota()
     }
 }
 
+
+// OPERACIONES OPERACION C
 void ingresarConsulta(string motivo, string ci)
 {
     // CREAR DTFECHA
@@ -512,16 +533,26 @@ void ingresarConsulta()
     cin >> ci;
     if (existesocio(ci))
     {
-        cout << "Ingresar  Motivo: " << endl;
-        cin >> motivo;
-        ingresarConsulta(motivo, ci);
+        if (consultaslibres(ci))
+        {
+            cout << "Ingresar  Motivo: " << endl;
+            cin >> motivo;
+            ingresarConsulta(motivo, ci);
+        }
+        else
+        {
+            cout << "NO SE PUEDE INGRESAR MAS CONSULTAS" << endl;
+            sleep(3);
+        }
     }
     else
     {
+        sleep(3);
         cout << "NO EXISTE EL SOCIO" << endl;
     }
 }
 
+// OPERACIONES OPERACION D
 DtConsulta **verConsultasAntesDeFecha(DtFecha &fecha, string ciSocio, int &cantConsultas)
 {
     Socio *socio;
@@ -565,18 +596,11 @@ DtConsulta **verConsultasAntesDeFecha(DtFecha &fecha, string ciSocio, int &cantC
                 }
             }
         }
-        else
-        {
-        }
-        if (i == socio->getTopeConsultas() and f != cantConsultas)
-        {
-            consultas[f] = nullptr;
-        }
     }
 
     return consultas;
 }
-DtConsulta **verConsultasAntesDeFecha()
+void verConsultasAntesDeFecha()
 {
     string ci;
     cout << "_________________________________" << endl;
@@ -587,7 +611,7 @@ DtConsulta **verConsultasAntesDeFecha()
     if (existesocio(ci))
     {
         // CREAR DTFECHA
-        int dia, mes, anio, cantConsultas;
+        int dia, mes, anio, cantConsultas, cantConsultasMenores;
         cout << "Ingresar Fecha de Ingreso" << endl;
         cout << "Dia: " << endl;
         cin >> dia;
@@ -604,29 +628,31 @@ DtConsulta **verConsultasAntesDeFecha()
             if (coleccionSocios.socio[i]->getCi() == ci)
             {
                 cantConsultas = coleccionSocios.socio[i]->getTopeConsultas();
+                cantConsultasMenores = coleccionSocios.socio[i]->cantidadConsultasAntesDeFecha(fechaIngreso);
             }
         }
-        if (cantConsultas > 0)
+        if (cantConsultasMenores > 0)
         {
-            DtConsulta **consultas = new DtConsulta *[cantConsultas];
+            DtConsulta **consultas = new DtConsulta *[cantConsultasMenores];
             consultas = verConsultasAntesDeFecha(fechaIngreso, ci, cantConsultas);
 
             // Implementar una función en socio que devuelva la cantidad de consultas maximas (INT)
-            int f = 0;
-            do
-            {
-                f++;
-            } while (consultas[f] != nullptr && f != cantConsultas);
-            for (int i = 0; i < f; i++)
+            for (int i = 0; i < cantConsultasMenores; i++)
             {
                 cout << "Fecha: " << consultas[i]->getFechaConsulta().getDia() << "/" << consultas[i]->getFechaConsulta().getMes() << "/" << consultas[i]->getFechaConsulta().getAnio() << endl;
                 cout << "Motivo: " << consultas[i]->getMotivo() << endl;
             }
+            printf("sali del for");
+            sleep(3);
+            for (int i = 0; i < cantConsultasMenores; i++) {
+                delete consultas[i];
+            }
+            delete[] consultas;
             sleep(3);
         }
         else
         {
-            cout << "NO HAY CONSULTAS" << endl;
+            cout << "NO HAY CONSULTAS VALIDAS" << endl;
             sleep(5);
         }
     }
@@ -635,6 +661,9 @@ DtConsulta **verConsultasAntesDeFecha()
         cout << "NO EXISTE EL SOCIO" << endl;
         sleep(5);
     }
+    cout << "sali del if " << endl;
+    sleep(3);
+
 }
 void eliminarSocio(string ci)
 {
@@ -674,6 +703,7 @@ void eliminarSocio(string ci)
     cout << "Socio con CI " << ci << " eliminado correctamente." << endl;
 }
 // FUNCIONES AUXILIARES
+
 
 void menu()
 {

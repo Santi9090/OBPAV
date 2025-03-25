@@ -101,3 +101,25 @@ Consulta *Socio::getConsulta(int posicion)
     return this->Consultas[posicion];
 }
 
+// Metodo que retorna la cantidad de consultas antes de una fecha dada
+int Socio::cantidadConsultasAntesDeFecha(DtFecha fecha)
+{
+    int f = 0;
+    for (int i = 0; i < this->topeConsultas; i++)
+    {
+        if (fecha.getAnio() > this->getConsulta(i)->getFechaConsulta().getAnio())
+            f++;
+        else if (fecha.getAnio() == this->getConsulta(i)->getFechaConsulta().getAnio())
+            if (fecha.getMes() > this->getConsulta(i)->getFechaConsulta().getMes())
+                f++;
+            else if (fecha.getMes() == this->getConsulta(i)->getFechaConsulta().getMes())
+            {
+                if (fecha.getDia() > this->getConsulta(i)->getFechaConsulta().getDia())
+                    f++;
+            }
+        else
+        {
+        }
+    }
+    return f;
+}

@@ -46,6 +46,8 @@ public:
     void setTopeMascotas(int tope);
     int getTopeMascotas();
 
+    int cantidadConsultasAntesDeFecha(DtFecha fecha);
+
     ~Socio();
     Consulta **obtenerConsulta(int &);
     Consulta **eliminarConsulta(Consulta consulta);
