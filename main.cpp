@@ -522,6 +522,110 @@ void ingresarConsulta()
     }
 }
 
+
+DtConsulta **verConsultasAntesDeFecha(DtFecha &fecha, string ciSocio, int &cantConsultas)
+{
+    Socio *socio;
+    DtConsulta **consultas = new DtConsulta*[cantConsultas];
+    int f = 0 ;
+    for (int i = 0; i < coleccionSocios.topeU; i++)
+    {
+        if (coleccionSocios.socio[i]->getCi() == ciSocio)
+        {
+            socio = coleccionSocios.socio[i];
+        }
+    }
+
+    for (int i = 0; i < socio->getTopeConsultas(); i++)
+    {
+        if (fecha.getAnio() > socio->getConsulta(i)->getFechaConsulta().getAnio())
+        {
+            consultas[f] = new DtConsulta(socio->getConsulta(i)->getFechaConsulta(), socio->getConsulta(i)->getMotivo());
+            consultas[f]->setFechaConsulta(socio->getConsulta(i)->getFechaConsulta());
+            consultas[f]->setMotivo(socio->getConsulta(i)->getMotivo());
+
+            f++;
+        }
+        else if (fecha.getAnio() == socio->getConsulta(i)->getFechaConsulta().getAnio())
+        {
+            if (fecha.getMes() > socio->getConsulta(i)->getFechaConsulta().getMes())
+            {
+                consultas[f] = new DtConsulta(socio->getConsulta(i)->getFechaConsulta(), socio->getConsulta(i)->getMotivo());
+                consultas[f]->setFechaConsulta(socio->getConsulta(i)->getFechaConsulta());
+                consultas[f]->setMotivo(socio->getConsulta(i)->getMotivo());
+                f++;
+            }
+            else if (fecha.getMes() == socio->getConsulta(i)->getFechaConsulta().getMes())
+            {
+                if (fecha.getDia() > socio->getConsulta(i)->getFechaConsulta().getDia())
+                {
+                    consultas[f] = new DtConsulta(socio->getConsulta(i)->getFechaConsulta(), socio->getConsulta(i)->getMotivo());
+                    consultas[f]->setFechaConsulta(socio->getConsulta(i)->getFechaConsulta());
+                    consultas[f]->setMotivo(socio->getConsulta(i)->getMotivo());
+                    f++;
+                }
+            }
+        }
+        else
+        {
+        }
+    }
+    return consultas;
+}
+DtConsulta **verConsultasAntesDeFecha()
+{
+    string ci;
+    cout << "_________________________________" << endl;
+    cout << "Ingresar Socio" << endl;
+    cout << "       Digitar Ci: " << endl;
+    cin >> ci;
+
+    if (existesocio(ci))
+    {
+        // CREAR DTFECHA
+        int dia, mes, anio, cantConsultas;
+        cout << "Ingresar Fecha de Ingreso" << endl;
+        cout << "Dia: " << endl;
+        cin >> dia;
+        cout << "Mes: " << endl;
+        cin >> mes;
+        cout << "Año: " << endl;
+        cin >> anio;
+        DtFecha fechaIngreso = DtFecha(dia, mes, anio);
+        fechaIngreso.setAnio(anio);
+        fechaIngreso.setMes(mes);
+        fechaIngreso.setDia(dia);
+        for (int i = 0; i < coleccionSocios.topeU; i++)
+        {
+            if (coleccionSocios.socio[i]->getCi() == ci)
+            {
+                cantConsultas = coleccionSocios.socio[i]->getTopeConsultas();
+            }
+        }
+        if (cantConsultas > 0)
+        {
+            DtConsulta **consultas = new DtConsulta *[cantConsultas];
+            consultas = verConsultasAntesDeFecha(fechaIngreso, ci, cantConsultas);
+
+            for (int i = 0; i < cantConsultas; i++)
+            {
+                cout << "Fecha: " << consultas[i]->getFechaConsulta().getDia() << "/" << consultas[i]->getFechaConsulta().getMes() << "/" << consultas[i]->getFechaConsulta().getAnio() << endl;
+                cout << "Motivo: " << consultas[i]->getMotivo() << endl;
+            }
+            sleep(10);
+        }
+        else
+        {
+            cout << "NO HAY CONSULTAS" << endl;
+            sleep(5);
+        }
+    }
+    else
+    {
+        cout << "NO EXISTE EL SOCIO" << endl;
+        sleep(5);
+    }
+}
 void eliminarSocio(string ci)
 {
     int indice = -1;
@@ -569,6 +673,7 @@ void menu()
     cout << "   1)Registrar Socio" << endl;
     cout << "   2)Ingresar Mascota" << endl;
     cout << "   3)Ingresar Consulta" << endl;
+    cout << "   4)Mostrar Consultas" << endl;
     cout << "   9)Mostrar Socios" << endl;
     cout << "   10)Mostrar Socios y Mascotas" << endl;
     cout << "   0)Salir" << endl;
@@ -633,6 +738,7 @@ int main()
             ingresarConsulta();
             break;
         case 4:
+            verConsultasAntesDeFecha();
             break;
         case 5:
             break;

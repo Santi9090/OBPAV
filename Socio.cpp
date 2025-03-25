@@ -62,33 +62,42 @@ Consulta **Socio::obtenerConsulta(int &cantSocios)
 }
 Consulta **Socio::eliminarConsulta(Consulta consulta) {}
 
-void Socio::setTopeConsultas(int tope){
+void Socio::setTopeConsultas(int tope)
+{
 
-    this->topeConsultas=tope;
+    this->topeConsultas = tope;
 }
-int Socio::getTopeConsultas(){
+int Socio::getTopeConsultas()
+{
     return this->topeConsultas;
 }
 
-void Socio::setTopeMascotas(int tope){
-    this->topeMascotas=tope;
+void Socio::setTopeMascotas(int tope)
+{
+    this->topeMascotas = tope;
 }
-int Socio::getTopeMascotas(){
+int Socio::getTopeMascotas()
+{
     return this->topeMascotas;
 }
 
-void Socio::setConsulta(Consulta * consulta){
-        this->Consultas[this->topeConsultas] = consulta;
-        this->topeConsultas++;
+void Socio::setConsulta(Consulta *consulta)
+{
+    this->Consultas[this->topeConsultas] = consulta;
+    this->topeConsultas++;
 }
-Consulta ** Socio::getConsultas(){
+Consulta **Socio::getConsultas()
+{
     return this->Consultas;
 }
 
-Mascota * Socio::getMascota(int posicion){
+Mascota *Socio::getMascota(int posicion)
+{
     return this->Mascotas[posicion];
 }
 
-Consulta * Socio::getConsulta(int posicion){
+Consulta *Socio::getConsulta(int posicion)
+{
     return this->Consultas[posicion];
 }
+
