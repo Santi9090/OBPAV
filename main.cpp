@@ -522,12 +522,11 @@ void ingresarConsulta()
     }
 }
 
-
 DtConsulta **verConsultasAntesDeFecha(DtFecha &fecha, string ciSocio, int &cantConsultas)
 {
     Socio *socio;
-    DtConsulta **consultas = new DtConsulta*[cantConsultas];
-    int f = 0 ;
+    DtConsulta **consultas = new DtConsulta *[cantConsultas];
+    int f = 0;
     for (int i = 0; i < coleccionSocios.topeU; i++)
     {
         if (coleccionSocios.socio[i]->getCi() == ciSocio)
@@ -569,7 +568,8 @@ DtConsulta **verConsultasAntesDeFecha(DtFecha &fecha, string ciSocio, int &cantC
         else
         {
         }
-        if(i==socio->getTopeConsultas() and f != cantConsultas){
+        if (i == socio->getTopeConsultas() and f != cantConsultas)
+        {
             consultas[f] = nullptr;
         }
     }
@@ -609,11 +609,14 @@ DtConsulta **verConsultasAntesDeFecha()
         if (cantConsultas > 0)
         {
             DtConsulta **consultas = new DtConsulta *[cantConsultas];
-            consultas = verConsultasAntesDeFecha(fechaIngreso, ci, cantConsultas); 
+            consultas = verConsultasAntesDeFecha(fechaIngreso, ci, cantConsultas);
+
+            // Implementar una función en socio que devuelva la cantidad de consultas maximas (INT)
             int f = 0;
-            do{
+            do
+            {
                 f++;
-            }while (consultas[f] != nullptr && f != cantConsultas);
+            } while (consultas[f] != nullptr && f != cantConsultas);
             for (int i = 0; i < f; i++)
             {
                 cout << "Fecha: " << consultas[i]->getFechaConsulta().getDia() << "/" << consultas[i]->getFechaConsulta().getMes() << "/" << consultas[i]->getFechaConsulta().getAnio() << endl;
