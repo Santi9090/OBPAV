@@ -569,7 +569,11 @@ DtConsulta **verConsultasAntesDeFecha(DtFecha &fecha, string ciSocio, int &cantC
         else
         {
         }
+        if(i==socio->getTopeConsultas() and f != cantConsultas){
+            consultas[f] = nullptr;
+        }
     }
+
     return consultas;
 }
 DtConsulta **verConsultasAntesDeFecha()
@@ -605,14 +609,17 @@ DtConsulta **verConsultasAntesDeFecha()
         if (cantConsultas > 0)
         {
             DtConsulta **consultas = new DtConsulta *[cantConsultas];
-            consultas = verConsultasAntesDeFecha(fechaIngreso, ci, cantConsultas);
-
-            for (int i = 0; i < cantConsultas; i++)
+            consultas = verConsultasAntesDeFecha(fechaIngreso, ci, cantConsultas); 
+            int f = 0;
+            do{
+                f++;
+            }while (consultas[f] != nullptr && f != cantConsultas);
+            for (int i = 0; i < f; i++)
             {
                 cout << "Fecha: " << consultas[i]->getFechaConsulta().getDia() << "/" << consultas[i]->getFechaConsulta().getMes() << "/" << consultas[i]->getFechaConsulta().getAnio() << endl;
                 cout << "Motivo: " << consultas[i]->getMotivo() << endl;
             }
-            sleep(10);
+            sleep(3);
         }
         else
         {
