@@ -662,38 +662,25 @@ void verConsultasAntesDeFecha()
 
 DtMascota **obtenerMascotas(string ci, int &cantMascotas)
 {
-    DtMascota *mascotas[cantMascotas];
-
-    cout << "entro a obtener mascotas" << endl;
-    sleep(3);
+    DtMascota **mascotas = new DtMascota *[cantMascotas];
     for (int i = 0; i < coleccionSocios.topeU; i++)
     {
         if (coleccionSocios.socio[i]->getCi() == ci)
         {
-            cout << " entro al if " << endl;
-            sleep(3);
             for (int j = 0; j < coleccionSocios.socio[i]->getTopeMascotas(); j++)
             {
-                try
+                Mascota *mascota = coleccionSocios.socio[i]->getMascota(j);
+                Gato *gato = dynamic_cast<Gato *>(mascota);
+                if (gato != nullptr)
+                {
+                    mascotas[j] = new DtGato(gato->getNombre(), gato->getGenero(), gato->getPeso(), gato->obtenerRacionDiaria(), gato->getTipoPelo());
+                    cout << coleccionSocios.socio[i]->getMascota(j)->getNombre() << endl;
+                }
+                else
                 {
                     Mascota *mascota = coleccionSocios.socio[i]->getMascota(j);
-                    Gato *gato = dynamic_cast<Gato *>(mascota);
-                    mascotas[j] = new DtGato(gato->getNombre(), gato->getGenero(),gato->getPeso(), gato->obtenerRacionDiaria(),gato->getTipoPelo());
-                    cout << mascota[j].getNombre() << endl;
-                    sleep(3);
-                }
-                catch (bad_cast)
-                {
-                    try
-                    {
-                        Mascota *mascota = coleccionSocios.socio[i]->getMascota(j);
-                        Perro *perro = dynamic_cast<Perro *>(mascota);
-                        mascotas[j] = new DtPerro(perro->getNombre(), perro->getGenero(), perro->getPeso(), perro->obtenerRacionDiaria(), perro->getRaza(), perro->getVacunaCachorro());
-                        sleep(3);
-                    }
-                    catch (bad_cast)
-                    {
-                    }
+                    Perro *perro = dynamic_cast<Perro *>(mascota);
+                    mascotas[j] = new DtPerro(perro->getNombre(), perro->getGenero(), perro->getPeso(), perro->obtenerRacionDiaria(), perro->getRaza(), perro->getVacunaCachorro());
                 }
             }
         }
@@ -702,11 +689,12 @@ DtMascota **obtenerMascotas(string ci, int &cantMascotas)
             cout << "no entro al if" << endl;
         }
     }
-    cout << " antes de mandar el arreglo de mascotas  " << endl;
+    cout << "Nombre: " << mascotas[0]->getNombre() << endl;
+    sleep(3);
     return mascotas;
 }
 
-void obtenerMascotas2()
+void obtenerMascotas()
 {
     string ci;
     cout << "_________________________________" << endl;
@@ -724,10 +712,12 @@ void obtenerMascotas2()
             }
         }
         int cantMascotas = coleccionSocios.socio[f]->getTopeMascotas();
-        DtMascota **mascotas = obtenerMascotas(ci, cantMascotas);
+        DtMascota ** mascotas = obtenerMascotas(ci, cantMascotas);
         cout << "Por entrar al for" << endl;
+        cout << "Nombre: " << mascotas[0]->getNombre() << endl;
         for (int i = 0; i < cantMascotas; i++)
         {
+            cout << " antes del nombre " << endl;
             cout << "Nombre: " << mascotas[i]->getNombre() << endl;
             cout << "Genero: " << mascotas[i]->getGenero() << endl;
             cout << "Peso: " << mascotas[i]->getPeso() << endl;
@@ -879,7 +869,7 @@ int main()
             verConsultasAntesDeFecha();
             break;
         case 5:
-            obtenerMascotas2();
+            obtenerMascotas();
             break;
         case 9:
             mostrarSocios();
