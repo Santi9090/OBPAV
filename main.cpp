@@ -672,18 +672,29 @@ DtMascota **obtenerMascotas(string ci, int &cantMascotas)
             {
                 try
                 {
-                    Mascota * mascota = coleccionSocios.socio[i]->getMascota(j);
+                    Mascota *mascota = coleccionSocios.socio[i]->getMascota(j);
                     DtGato &dtgato = dynamic_cast<DtGato &>(*mascota);
-                    mascotas[j] = dtmascota;
+                    mascotas[j] = new DtGato(dtgato.getNombre(), dtgato.getGenero(), dtgato.getPeso(), dtgato.getRacionDiaria(), dtgato.getTipoPelo());
                 }
                 catch (bad_cast)
                 {
+                    try
+                    {
+                        Mascota *mascota = coleccionSocios.socio[i]->getMascota(j);
+                        DtGato &dtgato = dynamic_cast<DtGato &>(*mascota);
+                        mascotas[j] = new DtGato(dtgato.getNombre(), dtgato.getGenero(), dtgato.getPeso(), dtgato.getRacionDiaria(), dtgato.getTipoPelo());
+                    }
+                    catch (bad_cast)
+                    {
+                    }
                 }
             }
         }
     }
+    cout << " antes de mandar el arreglo de mascotas  " << endl;
     return mascotas;
 }
+
 void obtenerMascotas2()
 {
     string ci;
@@ -702,8 +713,8 @@ void obtenerMascotas2()
             }
         }
         int cantMascotas = coleccionSocios.socio[f]->getTopeMascotas();
-        DtMascota **mascotas = new DtMascota *[cantMascotas];
-        mascotas = obtenerMascotas(ci, cantMascotas);
+        DtMascota **mascotas = obtenerMascotas(ci, cantMascotas);
+        cout << "Por entrar al for" << endl;
         for (int i = 0; i < cantMascotas; i++)
         {
             cout << "Nombre: " << mascotas[i]->getNombre() << endl;
@@ -729,7 +740,8 @@ void obtenerMascotas2()
             }
         }
         sleep(4);
-        for(int i= 0 ; i< cantMascotas;i++){
+        for (int i = 0; i < cantMascotas; i++)
+        {
             delete mascotas[i];
         }
         delete mascotas;
@@ -788,6 +800,7 @@ void menu()
     cout << "   2)Ingresar Mascota" << endl;
     cout << "   3)Ingresar Consulta" << endl;
     cout << "   4)Mostrar Consultas" << endl;
+    cout << "   5)Mostrar Macotas de un socio" << endl;
     cout << "   9)Mostrar Socios" << endl;
     cout << "   10)Mostrar Socios y Mascotas" << endl;
     cout << "   0)Salir" << endl;
@@ -855,6 +868,7 @@ int main()
             verConsultasAntesDeFecha();
             break;
         case 5:
+            obtenerMascotas2();
             break;
         case 9:
             mostrarSocios();
