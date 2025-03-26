@@ -35,7 +35,6 @@ struct
 // OPERACION F
 // DtMascota  obtenerMascotas(string ci, int& cantMascotas){}
 
-
 // FUNCIONES AUXIALIARES
 bool existesocio(string ci)
 {
@@ -60,9 +59,6 @@ bool consultaslibres(string ci)
     }
     return false;
 }
-
-
-
 
 // OPERACIONES OPERACION A
 void registrarSocio(string ci, string nombre, DtMascota &mascota)
@@ -493,7 +489,6 @@ void agregarMascota()
     }
 }
 
-
 // OPERACIONES OPERACION C
 void ingresarConsulta(string motivo, string ci)
 {
@@ -644,7 +639,8 @@ void verConsultasAntesDeFecha()
             }
             printf("sali del for");
             sleep(3);
-            for (int i = 0; i < cantConsultasMenores; i++) {
+            for (int i = 0; i < cantConsultasMenores; i++)
+            {
                 delete consultas[i];
             }
             delete[] consultas;
@@ -663,7 +659,95 @@ void verConsultasAntesDeFecha()
     }
     cout << "sali del if " << endl;
     sleep(3);
+}
 
+DtMascota **obtenerMascotas(string ci, int &cantMascotas)
+{
+    DtMascota **mascotas = new DtMascota *[cantMascotas];
+    for (int i = 0; i < coleccionSocios.topeU; i++)
+    {
+        if (coleccionSocios.socio[i]->getCi() == ci)
+        {
+            for (int j = 0; j < coleccionSocios.socio[i]->getTopeMascotas(); j++)
+            {
+
+                try
+                {
+                    DtMascota Mascota= coleccionSocios.socio[i]->getMascota(j);
+                    DtGato &dtgato = dynamic_cast<DtGato &>();
+                    mascotas[j] = new DtGato(dtgato.getNombre(), dtgato.getGenero(), dtgato.getPeso(), dtgato.getRacionDiaria(), dtgato.getTipoPelo());
+                }
+                catch (bad_cast)
+                {
+                    try
+                    {
+                        DtPerro &dtperro = dynamic_cast<DtPerro &>(coleccionSocios.socio[i]->getMascota(j));
+                        mascotas[j] = new DtPerro(dtperro.getNombre(), dtperro.getGenero(), dtperro.getPeso(), dtperro.getRacionDiaria(), dtperro.getRaza(), dtperro.getVacunaCachorro());
+                    }
+                    catch (bad_cast)
+                    {
+                    }
+                }
+            }
+        }
+    }
+    return mascotas;
+}
+void obtenerMascotas2()
+{
+    string ci;
+    cout << "_________________________________" << endl;
+    cout << "Ingresar Socio" << endl;
+    cout << "       Digitar Ci: " << endl;
+    cin >> ci;
+    if (existesocio(ci))
+    {
+        int f;
+        for (int i = 0; i < coleccionSocios.topeU; i++)
+        {
+            if (coleccionSocios.socio[i]->getCi() == ci)
+            {
+                f = i;
+            }
+        }
+        int cantMascotas = coleccionSocios.socio[f]->getTopeMascotas();
+        DtMascota **mascotas = new DtMascota *[cantMascotas];
+        mascotas = obtenerMascotas(ci, cantMascotas);
+        for (int i = 0; i < cantMascotas; i++)
+        {
+            cout << "Nombre: " << mascotas[i]->getNombre() << endl;
+            cout << "Genero: " << mascotas[i]->getGenero() << endl;
+            cout << "Peso: " << mascotas[i]->getPeso() << endl;
+            cout << "Racion Diaria: " << mascotas[i]->getRacionDiaria() << endl;
+            try
+            {
+                DtPerro &dtperro = dynamic_cast<DtPerro &>(*mascotas[i]);
+                cout << "Raza: " << dtperro.getRaza() << endl;
+                cout << "Vacuna Cachorro: " << dtperro.getVacunaCachorro() << endl;
+            }
+            catch (bad_cast)
+            {
+                try
+                {
+                    DtGato &dtgato = dynamic_cast<DtGato &>(*mascotas[i]);
+                    cout << "Tipo Pelo: " << dtgato.getTipoPelo() << endl;
+                }
+                catch (bad_cast)
+                {
+                }
+            }
+        }
+        sleep(4);
+        for(int i= 0 ; i< cantMascotas;i++){
+            delete mascotas[i];
+        }
+        delete mascotas;
+    }
+    else
+    {
+        cout << "NO EXISTE EL SOCIO" << endl;
+        sleep(3);
+    }
 }
 void eliminarSocio(string ci)
 {
@@ -703,7 +787,6 @@ void eliminarSocio(string ci)
     cout << "Socio con CI " << ci << " eliminado correctamente." << endl;
 }
 // FUNCIONES AUXILIARES
-
 
 void menu()
 {
