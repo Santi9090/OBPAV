@@ -22,7 +22,8 @@ public:
     void setGenero(Genero genero);
     void setPeso(float peso);
     virtual void setRacionDiaria(float racionDiaria);
-    ~DtMascota();
+
+    virtual ~DtMascota();
 };
 
 #endif

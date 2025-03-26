@@ -670,23 +670,14 @@ DtMascota **obtenerMascotas(string ci, int &cantMascotas)
         {
             for (int j = 0; j < coleccionSocios.socio[i]->getTopeMascotas(); j++)
             {
-
                 try
                 {
-                    DtMascota Mascota= coleccionSocios.socio[i]->getMascota(j);
-                    DtGato &dtgato = dynamic_cast<DtGato &>();
-                    mascotas[j] = new DtGato(dtgato.getNombre(), dtgato.getGenero(), dtgato.getPeso(), dtgato.getRacionDiaria(), dtgato.getTipoPelo());
+                    Mascota * mascota = coleccionSocios.socio[i]->getMascota(j);
+                    DtGato &dtgato = dynamic_cast<DtGato &>(*mascota);
+                    mascotas[j] = dtmascota;
                 }
                 catch (bad_cast)
                 {
-                    try
-                    {
-                        DtPerro &dtperro = dynamic_cast<DtPerro &>(coleccionSocios.socio[i]->getMascota(j));
-                        mascotas[j] = new DtPerro(dtperro.getNombre(), dtperro.getGenero(), dtperro.getPeso(), dtperro.getRacionDiaria(), dtperro.getRaza(), dtperro.getVacunaCachorro());
-                    }
-                    catch (bad_cast)
-                    {
-                    }
                 }
             }
         }
