@@ -675,14 +675,16 @@ DtMascota **obtenerMascotas(string ci, int &cantMascotas)
                     Mascota *mascota = coleccionSocios.socio[i]->getMascota(j);
                     DtGato &dtgato = dynamic_cast<DtGato &>(*mascota);
                     mascotas[j] = new DtGato(dtgato.getNombre(), dtgato.getGenero(), dtgato.getPeso(), dtgato.getRacionDiaria(), dtgato.getTipoPelo());
+                    cout << dtgato.getNombre() << endl;
                 }
                 catch (bad_cast)
                 {
                     try
                     {
                         Mascota *mascota = coleccionSocios.socio[i]->getMascota(j);
-                        DtGato &dtgato = dynamic_cast<DtGato &>(*mascota);
-                        mascotas[j] = new DtGato(dtgato.getNombre(), dtgato.getGenero(), dtgato.getPeso(), dtgato.getRacionDiaria(), dtgato.getTipoPelo());
+                        DtPerro &dtperro = dynamic_cast<DtPerro &>(*mascota);
+                        mascotas[j] = new DtPerro(dtperro.getNombre(), dtperro.getGenero(), dtperro.getPeso(), dtperro.getRacionDiaria(), dtperro.getRaza(), dtperro.getVacunaCachorro());
+                        cout << dtperro.getNombre() << endl;
                     }
                     catch (bad_cast)
                     {
