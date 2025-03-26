@@ -631,7 +631,6 @@ void verConsultasAntesDeFecha()
             DtConsulta **consultas = new DtConsulta *[cantConsultasMenores];
             consultas = verConsultasAntesDeFecha(fechaIngreso, ci, cantConsultas);
 
-            // Implementar una función en socio que devuelva la cantidad de consultas maximas (INT)
             for (int i = 0; i < cantConsultasMenores; i++)
             {
                 cout << "Fecha: " << consultas[i]->getFechaConsulta().getDia() << "/" << consultas[i]->getFechaConsulta().getMes() << "/" << consultas[i]->getFechaConsulta().getAnio() << endl;
@@ -663,34 +662,44 @@ void verConsultasAntesDeFecha()
 
 DtMascota **obtenerMascotas(string ci, int &cantMascotas)
 {
-    DtMascota **mascotas = new DtMascota *[cantMascotas];
+    DtMascota *mascotas[cantMascotas];
+
+    cout << "entro a obtener mascotas" << endl;
+    sleep(3);
     for (int i = 0; i < coleccionSocios.topeU; i++)
     {
         if (coleccionSocios.socio[i]->getCi() == ci)
         {
+            cout << " entro al if " << endl;
+            sleep(3);
             for (int j = 0; j < coleccionSocios.socio[i]->getTopeMascotas(); j++)
             {
                 try
                 {
                     Mascota *mascota = coleccionSocios.socio[i]->getMascota(j);
-                    DtGato &dtgato = dynamic_cast<DtGato &>(*mascota);
-                    mascotas[j] = new DtGato(dtgato.getNombre(), dtgato.getGenero(), dtgato.getPeso(), dtgato.getRacionDiaria(), dtgato.getTipoPelo());
-                    cout << dtgato.getNombre() << endl;
+                    Gato *gato = dynamic_cast<Gato *>(mascota);
+                    mascotas[j] = new DtGato(gato->getNombre(), gato->getGenero(),gato->getPeso(), gato->obtenerRacionDiaria(),gato->getTipoPelo());
+                    cout << mascota[j].getNombre() << endl;
+                    sleep(3);
                 }
                 catch (bad_cast)
                 {
                     try
                     {
                         Mascota *mascota = coleccionSocios.socio[i]->getMascota(j);
-                        DtPerro &dtperro = dynamic_cast<DtPerro &>(*mascota);
-                        mascotas[j] = new DtPerro(dtperro.getNombre(), dtperro.getGenero(), dtperro.getPeso(), dtperro.getRacionDiaria(), dtperro.getRaza(), dtperro.getVacunaCachorro());
-                        cout << dtperro.getNombre() << endl;
+                        Perro *perro = dynamic_cast<Perro *>(mascota);
+                        mascotas[j] = new DtPerro(perro->getNombre(), perro->getGenero(), perro->getPeso(), perro->obtenerRacionDiaria(), perro->getRaza(), perro->getVacunaCachorro());
+                        sleep(3);
                     }
                     catch (bad_cast)
                     {
                     }
                 }
             }
+        }
+        else
+        {
+            cout << "no entro al if" << endl;
         }
     }
     cout << " antes de mandar el arreglo de mascotas  " << endl;
