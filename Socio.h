@@ -6,6 +6,7 @@
 #include "DtFecha.h"
 #include "Consulta.h"
 #include "Mascota.h"
+#include "DtMascota.h"
 #define CANT_MASCOTAS 10
 
 using namespace std; // Uso del espacio de nombres std
@@ -25,7 +26,7 @@ public:
     Socio();
 
     // esto esta mal el constructor tiene que tener una mascota 
-    Socio(string ci, string Nombre, DtFecha fechaIngreso);
+    Socio(string ci, string Nombre, DtFecha fechaIngreso,Mascota * mascota);
     void setCi(string ci);
     string getCi();
     void setNombre(string Nombre);

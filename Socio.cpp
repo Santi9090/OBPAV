@@ -7,11 +7,13 @@ using namespace std;
 Socio::Socio() {}
 
 // Constructor con parámetros
-Socio::Socio(string ci, string Nombre, DtFecha fechaIngreso)
+Socio::Socio(string ci, string Nombre, DtFecha fechaIngreso,Mascota * mascota)
 {
     this->ci = ci;
     this->Nombre = Nombre;
     this->fechaIngreso = fechaIngreso;
+    this->Mascotas[topeMascotas]=mascota;
+    this->topeMascotas++;
 }
 
 // Setter para `ci`
