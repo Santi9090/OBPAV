@@ -811,6 +811,22 @@ void menu()
     cout << "   0)Salir" << endl;
 }
 
+void eliminarSocio(string ci)
+{
+    int i = 0;
+    bool existe = false;
+    while (i < coleccionSocios.topeU && (!existe))
+    {
+        if (coleccionSocios.socio[i]->getCi() == ci)
+        {
+            existe = true;
+            delete coleccionSocios.socio[i];
+        }
+        i++;
+    }
+    cout << "Socio con CI " << ci << " eliminado correctamente." << endl;
+}
+
 void mostrarSocios()
 {
     // HACER EXCEPCIÓN SI NO HAY SOCIOS
