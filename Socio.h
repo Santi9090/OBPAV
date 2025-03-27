@@ -23,6 +23,8 @@ private:
 
 public:
     Socio();
+
+    // esto esta mal el constructor tiene que tener una mascota 
     Socio(string ci, string Nombre, DtFecha fechaIngreso);
     void setCi(string ci);
     string getCi();

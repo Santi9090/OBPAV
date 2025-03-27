@@ -15,11 +15,4 @@ bool DtPerro::getVacunaCachorro(){
     return vacunaCachorro;
 }
 
-void DtPerro::setRaza(RazaPerro raza) {
-    this->raza = raza;
-}
-
-void DtPerro::setVacunaCachorro(bool vacunaCachorro) {
-    this->vacunaCachorro = vacunaCachorro;
-}
 DtPerro::~DtPerro() {}

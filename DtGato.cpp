@@ -11,7 +11,4 @@ TipoPelo DtGato::getTipoPelo() const {
     return tipoPelo;
 }
 
-void DtGato::setTipoPelo(TipoPelo tipoPelo) {
-    this->tipoPelo = tipoPelo;
-}
 DtGato::~DtGato() {}

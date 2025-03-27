@@ -10,15 +10,13 @@ private:
     int dia;
     int mes;
     int anio;
+
 public:
     DtFecha();
     DtFecha(int dia, int mes, int anio);
     int getDia();
-    void setDia(int dia);
     int getMes();
-    void setMes(int mes);
     int getAnio();
-    void setAnio(int anio);
     ~DtFecha();
 };
 

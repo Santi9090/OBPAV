@@ -72,9 +72,6 @@ void registrarSocio(string ci, string nombre, DtMascota &mascota)
     cout << "Año: " << endl;
     cin >> anio;
     DtFecha fechaIngreso = DtFecha(dia, mes, anio);
-    fechaIngreso.setAnio(anio);
-    fechaIngreso.setMes(mes);
-    fechaIngreso.setDia(dia);
     Socio *socio = new Socio(ci, nombre, fechaIngreso);
     coleccionSocios.socio[coleccionSocios.topeU] = socio;
     coleccionSocios.socio[coleccionSocios.topeU]->setTopeConsultas(0);
@@ -667,6 +664,7 @@ void verConsultasAntesDeFecha()
     cout << "sali del if " << endl;
     sleep(3);
 }
+// OPERACIONES OPERACION E
 
 DtMascota **obtenerMascotas(string ci, int &cantMascotas)
 {
@@ -682,11 +680,9 @@ DtMascota **obtenerMascotas(string ci, int &cantMascotas)
                 if (gato != nullptr)
                 {
                     mascotas[j] = new DtGato(gato->getNombre(), gato->getGenero(), gato->getPeso(), gato->obtenerRacionDiaria(), gato->getTipoPelo());
-                    cout << coleccionSocios.socio[i]->getMascota(j)->getNombre() << endl;
                 }
                 else
                 {
-                    Mascota *mascota = coleccionSocios.socio[i]->getMascota(j);
                     Perro *perro = dynamic_cast<Perro *>(mascota);
                     mascotas[j] = new DtPerro(perro->getNombre(), perro->getGenero(), perro->getPeso(), perro->obtenerRacionDiaria(), perro->getRaza(), perro->getVacunaCachorro());
                 }

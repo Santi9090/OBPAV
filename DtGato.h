@@ -11,8 +11,7 @@ private:
 public:
     DtGato();
     DtGato(string nombre, Genero genero, float peso, float racionDiaria, TipoPelo tipoPelo);
-    TipoPelo getTipoPelo() const;
-    void setTipoPelo(TipoPelo tipoPelo);
+    TipoPelo getTipoPelo() const;;
     ~DtGato();
 };
 
