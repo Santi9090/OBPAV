@@ -507,9 +507,6 @@ void ingresarConsulta(string motivo, string ci)
     cout << "Año: " << endl;
     cin >> anio;
     DtFecha fechaIngreso = DtFecha(dia, mes, anio);
-    fechaIngreso.setAnio(anio);
-    fechaIngreso.setMes(mes);
-    fechaIngreso.setDia(dia);
 
     Consulta *consulta = new Consulta(fechaIngreso, motivo);
     for (int i = 0; i < coleccionSocios.topeU; i++)
@@ -571,8 +568,6 @@ DtConsulta **verConsultasAntesDeFecha(DtFecha &fecha, string ciSocio, int &cantC
         if (fecha.getAnio() > socio->getConsulta(i)->getFechaConsulta().getAnio())
         {
             consultas[f] = new DtConsulta(socio->getConsulta(i)->getFechaConsulta(), socio->getConsulta(i)->getMotivo());
-            consultas[f]->setFechaConsulta(socio->getConsulta(i)->getFechaConsulta());
-            consultas[f]->setMotivo(socio->getConsulta(i)->getMotivo());
 
             f++;
         }
@@ -581,8 +576,6 @@ DtConsulta **verConsultasAntesDeFecha(DtFecha &fecha, string ciSocio, int &cantC
             if (fecha.getMes() > socio->getConsulta(i)->getFechaConsulta().getMes())
             {
                 consultas[f] = new DtConsulta(socio->getConsulta(i)->getFechaConsulta(), socio->getConsulta(i)->getMotivo());
-                consultas[f]->setFechaConsulta(socio->getConsulta(i)->getFechaConsulta());
-                consultas[f]->setMotivo(socio->getConsulta(i)->getMotivo());
                 f++;
             }
             else if (fecha.getMes() == socio->getConsulta(i)->getFechaConsulta().getMes())
@@ -590,8 +583,6 @@ DtConsulta **verConsultasAntesDeFecha(DtFecha &fecha, string ciSocio, int &cantC
                 if (fecha.getDia() > socio->getConsulta(i)->getFechaConsulta().getDia())
                 {
                     consultas[f] = new DtConsulta(socio->getConsulta(i)->getFechaConsulta(), socio->getConsulta(i)->getMotivo());
-                    consultas[f]->setFechaConsulta(socio->getConsulta(i)->getFechaConsulta());
-                    consultas[f]->setMotivo(socio->getConsulta(i)->getMotivo());
                     f++;
                 }
             }
@@ -620,9 +611,6 @@ void verConsultasAntesDeFecha()
         cout << "Año: " << endl;
         cin >> anio;
         DtFecha fechaIngreso = DtFecha(dia, mes, anio);
-        fechaIngreso.setAnio(anio);
-        fechaIngreso.setMes(mes);
-        fechaIngreso.setDia(dia);
         for (int i = 0; i < coleccionSocios.topeU; i++)
         {
             if (coleccionSocios.socio[i]->getCi() == ci)
@@ -757,43 +745,7 @@ void obtenerMascotas()
         sleep(3);
     }
 }
-void eliminarSocio(string ci)
-{
-    int indice = -1;
-    for (int i = 0; i < coleccionSocios.topeU; i++)
-    {
-        if (coleccionSocios.socio[i]->getCi() == ci)
-        {
-            indice = i;
-            break;
-        }
-    }
-    if (indice == -1)
-    {
-        throw invalid_argument("No existe un socio registrado con la cédula: " + ci);
-    }
-    Socio *socio = coleccionSocios.socio[indice];
-    int cantConsultas;
-    Consulta **consultas = socio->obtenerConsulta(cantConsultas);
-    for (int i = 0; i < cantConsultas; i++)
-    {
-        delete consultas[i];
-    }
-    for (int i = 0; i < CANT_MASCOTAS; i++)
-    {
-        // if (socio.getmascota[i] != nullptr)
-        {
-            //  delete socio->topeMascotas[i];
-        }
-    }
-    delete socio;
-    for (int i = indice; i < coleccionSocios.topeU - 1; i++)
-    {
-        coleccionSocios.socio[i] = coleccionSocios.socio[i + 1];
-    }
-    coleccionSocios.topeU--;
-    cout << "Socio con CI " << ci << " eliminado correctamente." << endl;
-}
+
 // FUNCIONES AUXILIARES
 
 void menu()
