@@ -50,7 +50,7 @@ void existesocio(string ci)
     }
     if (!existesocio)
     {
-        throw invalid_argument("\nERROR: NO EXISTE USUARIO CON ESA CI EN EL SISTEMA\n");
+        throw invalid_argument("\nERROR: NO EXISTE UN SOCIO CON ESA CI EN EL SISTEMA\n");
     }
 }
 
@@ -68,7 +68,7 @@ void noExisteUsuario(string ci)
     }
     if (existesocio)
     {
-        throw invalid_argument("\nERROR: YA EXISTE USUARIO CON ESA CI EN EL SISTEMA\n");
+        throw invalid_argument("\nERROR: YA EXISTE UN SOCIO CON ESA CI EN EL SISTEMA\n");
     }
 }
 
@@ -86,7 +86,7 @@ void consultaslibre(string ci)
     }
     if (!consultalibre)
     {
-        throw invalid_argument("\nERROR: USUARIOS SIN CONSULTAS LIBRES \n");
+        throw invalid_argument("\nERROR: SOCIO SIN CONSULTAS LIBRES \n");
     }
 }
 void mascotaslibre(string ci)
@@ -104,12 +104,12 @@ void mascotaslibre(string ci)
     }
     if (!consultalibre)
     {
-        throw invalid_argument("\nERROR:USUARIO MAXIMAS MASCOTAS PERMITIDAS");
+        throw invalid_argument("\nERROR: EL SOCIO LLEGO AL MAXIMO DE MASCOTAS PERMITIDAS");
         sleep(3);
     }
 }
 
-// OPERACIONES OPERACION A
+// OPERACIONES: OPERACION A
 void registrarSocio(string ci, string nombre, DtMascota &mascota)
 {
     int dia, mes, anio;
@@ -130,7 +130,7 @@ void registrarSocio(string ci, string nombre, DtMascota &mascota)
         coleccionSocios.socio[coleccionSocios.topeU] = socio;
         coleccionSocios.socio[coleccionSocios.topeU]->setTopeConsultas(0);
         coleccionSocios.socio[coleccionSocios.topeU]->setTopeMascotas(1);
-        cout << "Mascota añadida: " << perro->getNombre() << " al socio " << nombre << endl;
+        cout << "Mascota (perro) añadida: " << perro->getNombre() << " al socio " << nombre << endl;
         sleep(3);
     }
     catch (bad_cast)
@@ -143,7 +143,7 @@ void registrarSocio(string ci, string nombre, DtMascota &mascota)
             coleccionSocios.socio[coleccionSocios.topeU] = socio;
             coleccionSocios.socio[coleccionSocios.topeU]->setTopeConsultas(0);
             coleccionSocios.socio[coleccionSocios.topeU]->setTopeMascotas(1);
-            cout << "Mascota añadida: " << gato->getNombre() << " al socio " << nombre << endl;
+            cout << "Mascota (gato) añadida: " << gato->getNombre() << " al socio " << nombre << endl;
             coleccionSocios.socio[coleccionSocios.topeU]->setMascota(gato);
 
             sleep(3);
@@ -270,10 +270,10 @@ void registrarSocio()
                 razaperro = otro;
             }
             default:
-                cout << "Raza Invalid" << endl;
+                cout << "Raza Invalida" << endl;
                 break;
             }
-            cout << "Tiene vacuna ? " << endl;
+            cout << "¿Tiene vacuna? " << endl;
             cout << "1-Si" << endl;
             cout << "2-No" << endl;
             cin >> menuvacuna;
@@ -484,10 +484,10 @@ void agregarMascota()
                 razaperro = otro;
             }
             default:
-                cout << "Raza Invalid" << endl;
+                cout << "Raza Invalida" << endl;
                 break;
             }
-            cout << "Tiene vacuna ? " << endl;
+            cout << "¿Tiene vacuna? " << endl;
             cout << "1-Si" << endl;
             cout << "2-No" << endl;
             cin >> menuvacuna;
@@ -550,7 +550,7 @@ void ingresarConsulta(string motivo, string ci)
 {
     // CREAR DTFECHA
     int dia, mes, anio;
-    cout << "Ingresar Fecha de Ingreso" << endl;
+    cout << "Digite la fecha de la consulta" << endl;
     cout << "Dia: " << endl;
     cin >> dia;
     cout << "Mes: " << endl;
@@ -576,7 +576,7 @@ void ingresarConsulta()
     string ci, motivo;
     // MENU DE LOS DATOS DEL SOCIO CI Y NOMBRE
     cout << "_________________________________" << endl;
-    cout << "       INGRESAR COSNULTA " << endl;
+    cout << "       INGRESAR CONSULTA " << endl;
     cout << "Ingresar Socio" << endl;
     cout << "       Digitar Ci: " << endl;
     cin >> ci;
@@ -658,7 +658,7 @@ void verConsultasAntesDeFecha()
         sleep(3);
         // CREAR DTFECHA
         int dia, mes, anio, cantConsultas, cantConsultasMenores;
-        cout << "Ingresar Fecha de Ingreso" << endl;
+        cout << "Digite la fecha de ingreso" << endl;
         cout << "Dia: " << endl;
         cin >> dia;
         cout << "Mes: " << endl;
