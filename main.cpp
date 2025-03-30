@@ -548,26 +548,41 @@ void agregarMascota()
 // OPERACIONES OPERACION C
 void ingresarConsulta(string motivo, string ci)
 {
-    // CREAR DTFECHA
-    int dia, mes, anio;
-    cout << "Digite la fecha de la consulta" << endl;
-    cout << "Dia: " << endl;
-    cin >> dia;
-    cout << "Mes: " << endl;
-    cin >> mes;
-    cout << "Año: " << endl;
-    cin >> anio;
-    DtFecha fechaIngreso = DtFecha(dia, mes, anio);
-
-    Consulta *consulta = new Consulta(fechaIngreso, motivo);
-    for (int i = 0; i < coleccionSocios.topeU; i++)
+    try
     {
-        if (coleccionSocios.socio[i]->getCi() == ci)
+        int dia, mes, anio;
+        cout << "Digite la fecha de la consulta" << endl;
+        cout << "Dia: " << endl;
+        cin >> dia;
+        cout << "Mes: " << endl;
+        cin >> mes;
+        cout << "Año: " << endl;
+        cin >> anio;
+        DtFecha fechaIngreso = DtFecha(dia, mes, anio);
+
+        Consulta *consulta = new Consulta(fechaIngreso, motivo);
+
+        bool encontrado = false;
+        for (int i = 0; i < coleccionSocios.topeU; i++)
         {
-            coleccionSocios.socio[i]->setConsulta(consulta);
-            cout << "Consulta añadida al socio " << coleccionSocios.socio[i]->getNombre() << endl;
-            sleep(3);
+            if (coleccionSocios.socio[i]->getCi() == ci)
+            {
+                coleccionSocios.socio[i]->setConsulta(consulta);
+                cout << "Consulta añadida al socio " << coleccionSocios.socio[i]->getNombre() << endl;
+                encontrado = true;
+                sleep(3);
+                break;
+            }
         }
+        if (!encontrado)
+        {
+            throw invalid_argument("Socio no encontrado.");
+        }
+    }
+    catch (const exception &e)
+    {
+        cout << "Error: " << e.what() << endl;
+        sleep(3);
     }
 }
 
@@ -801,11 +816,19 @@ void menu()
     cout << "   3)Ingresar Consulta" << endl;
     cout << "   4)Mostrar Consultas" << endl;
     cout << "   5)Mostrar Macotas de un socio" << endl;
+    cout << "   6)Eliminar Socio" << endl;
     cout << "   9)Mostrar Socios" << endl;
     cout << "   10)Mostrar Socios y Mascotas" << endl;
     cout << "   0)Salir" << endl;
 }
-
+string solicitarSocio(){
+    string ci;
+    cout << "_________________________________" << endl;
+    cout << "Ingresar Socio" << endl;
+    cout << "       Digitar Ci: " << endl;
+    cin >> ci;
+    return ci;
+}
 void eliminarSocio(string ci)
 {
     int i = 0;
@@ -816,10 +839,21 @@ void eliminarSocio(string ci)
         {
             existe = true;
             delete coleccionSocios.socio[i];
-        }
-        i++;
+
+            for (int j = i; j < coleccionSocios.topeU - 1; j++) {
+                coleccionSocios.socio[j] = coleccionSocios.socio[j + 1];
+            }
+
+            coleccionSocios.topeU--; 
+        }else{
+            i++;
     }
-    cout << "Socio con CI " << ci << " eliminado correctamente." << endl;
+    }
+    if (existe) {
+        cout << "Socio con CI " << ci << " eliminado correctamente." << endl;
+    } else {
+        cout << "Socio con CI " << ci << " no encontrado." << endl;
+    }
     sleep(3);
 }
 
@@ -887,6 +921,11 @@ int main()
         case 5:
             obtenerMascotas();
             break;
+        case 6:{
+            string ci = solicitarSocio();
+            eliminarSocio(ci);
+            break;
+        }
         case 9:
             mostrarSocios();
             break;
