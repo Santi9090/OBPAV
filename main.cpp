@@ -22,19 +22,6 @@ struct
     int topeU;
 } coleccionSocios;
 
-// OPERACION A
-// void registarSocio(string ci, string nombre, DtMascota& dtMascota){}
-// OPERACION B
-// void agregarMascota(string ci, DtMascota& dtMascota){}
-// OPERACION C
-// void ingresarConsulta(string motivo, string ci){}
-// OPERACION D
-// DtConsulta  verConsultasAntesDeFecha(DtFecha& fecha, string ciSocio, int& cantConsultas){}
-// OPERACION E
-// void eliminarSocio(string ci){}
-// OPERACION F
-// DtMascota  obtenerMascotas(string ci, int& cantMascotas){}
-
 // FUNCIONES AUXIALIARES
 void existesocio(string ci)
 {
@@ -50,7 +37,7 @@ void existesocio(string ci)
     }
     if (!existesocio)
     {
-        throw invalid_argument("\nERROR: NO EXISTE UN SOCIO CON ESA CI EN EL SISTEMA\n");
+        throw invalid_argument("\nERROR: No existe un socio con esa CI en el sistema\n");
     }
 }
 
@@ -68,7 +55,7 @@ void noExisteUsuario(string ci)
     }
     if (existesocio)
     {
-        throw invalid_argument("\nERROR: YA EXISTE UN SOCIO CON ESA CI EN EL SISTEMA\n");
+        throw invalid_argument("\nERROR: Ya existe un socio con esa CI en el sistema\n");
     }
 }
 
@@ -86,7 +73,7 @@ void consultaslibre(string ci)
     }
     if (!consultalibre)
     {
-        throw invalid_argument("\nERROR: SOCIO SIN CONSULTAS LIBRES \n");
+        throw invalid_argument("\nERROR: Socio sin consultas libres \n");
     }
 }
 void mascotaslibre(string ci)
@@ -104,7 +91,7 @@ void mascotaslibre(string ci)
     }
     if (!consultalibre)
     {
-        throw invalid_argument("\nERROR: EL SOCIO LLEGO AL MAXIMO DE MASCOTAS PERMITIDAS");
+        throw invalid_argument("\nERROR: El socio llego al maximo de consultas permitidas");
         sleep(3);
     }
 }
@@ -123,7 +110,6 @@ void registrarSocio(string ci, string nombre, DtMascota &mascota)
     DtFecha fechaIngreso = DtFecha(dia, mes, anio);
     try
     {
-        cout << "entro al try" << endl;
         DtPerro &dtperro = dynamic_cast<DtPerro &>(mascota);
         Perro *perro = new Perro(dtperro.getNombre(), dtperro.getGenero(), dtperro.getPeso(), dtperro.getRacionDiaria(), dtperro.getRaza(), dtperro.getVacunaCachorro());
         Socio *socio = new Socio(ci, nombre, fechaIngreso, perro);
@@ -349,7 +335,7 @@ void agregarMascota(string ci, DtMascota &dtMascota)
     {
         try
         {
-            ;
+            
             DtPerro &dtperro = dynamic_cast<DtPerro &>(dtMascota);
             Perro *perro = new Perro(dtperro.getNombre(), dtperro.getGenero(), dtperro.getPeso(), dtperro.getRacionDiaria(), dtperro.getRaza(), dtperro.getVacunaCachorro());
             coleccionSocios.socio[f]->setMascota(perro);
@@ -387,7 +373,7 @@ void agregarMascota()
 
     // MENU DE LOS DATOS DEL SOCIO CI Y NOMBRE
     cout << "_________________________________" << endl;
-    cout << "Socio A ingresar Mascota  " << endl;
+    cout << "Socio a ingresar Mascota  " << endl;
     cout << "       Digitar Ci: " << endl;
     cin >> ci;
     try
@@ -395,7 +381,7 @@ void agregarMascota()
         existesocio(ci);
         sleep(3);
         // MENU PARA INGRESAR UNA MASCOTA
-        cout << "INGRESAR MASCOTA" << endl;
+        cout << "Ingresar Mascota" << endl;
         cout << "Tipo:" << endl;
         cout << "1) Perro" << endl;
         cout << "2) Gato" << endl;
@@ -525,7 +511,7 @@ void agregarMascota()
                 else if (menutipopelo == 3)
                     tipopelo = Largo;
                 else
-                    cout << "INVALIDO " << endl;
+                    cout << "Invalido " << endl;
 
             } while (menutipopelo != 1 && menutipopelo != 2 && menutipopelo != 3);
 
@@ -534,7 +520,7 @@ void agregarMascota()
             break;
         }
         default:
-            cout << "INVALIDO" << endl;
+            cout << "Invalido" << endl;
             break;
         }
     }
@@ -591,7 +577,7 @@ void ingresarConsulta()
     string ci, motivo;
     // MENU DE LOS DATOS DEL SOCIO CI Y NOMBRE
     cout << "_________________________________" << endl;
-    cout << "       INGRESAR CONSULTA " << endl;
+    cout << "       Ingresar Consulta " << endl;
     cout << "Ingresar Socio" << endl;
     cout << "       Digitar Ci: " << endl;
     cin >> ci;
@@ -709,7 +695,7 @@ void verConsultasAntesDeFecha()
         }
         else
         {
-            cout << "NO HAY CONSULTAS VALIDAS" << endl;
+            cout << "No hay consutas validas" << endl;
             sleep(5);
         }
     }
@@ -927,6 +913,7 @@ int main()
             break;
         }
         case 9:
+            cout << "Lista de socios: " << endl;
             mostrarSocios();
             break;
         case 10:
