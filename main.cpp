@@ -147,7 +147,7 @@ void registrarSocio()
     string ci, nombre, mnombre, raza;
     float peso;
     bool vacunaCachorro;
-    int menutipo, menugenero, menuvacuna;
+    int menutipo, menugenero, menuvacuna,menurazaperro,menutipopelo;
     DtGato dtgato = DtGato();
     DtPerro dtperro = DtPerro();
     Genero genero;
@@ -164,7 +164,6 @@ void registrarSocio()
         noExisteUsuario(ci);
         cout << "       Ingresar Nombre: " << endl;
         cin >> nombre;
-        // noExisteSocio(ci); //Funcion a implementar que chequee si existe un socio
 
         // MENU PARA INGRESAR UNA MASCOTA
         cout << "INGRESAR MASCOTA" << endl;
@@ -176,14 +175,13 @@ void registrarSocio()
         // DIGITAR NOMBRE DE LA MASCOTA
         cout << "Nombre de la Mascota" << endl;
         cin >> mnombre;
-
-        // MENU PARA SELECCIONAR GENERO
-        cout << "Seleccionar genero:" << endl;
-        cout << "1) Hembra " << endl;
-        cout << "2) Macho " << endl;
-        cin >> menugenero;
         do
         {
+            // MENU PARA SELECCIONAR GENERO
+            cout << "Seleccionar genero:" << endl;
+            cout << "1) Hembra " << endl;
+            cout << "2) Macho " << endl;
+            cin >> menugenero;
             if (menugenero == 1)
             {
                 genero = Macho;
@@ -194,7 +192,8 @@ void registrarSocio()
             }
             else
             {
-                cout << "Invalido " << endl;
+                cout << "Invalido\n " << endl;
+                sleep(2);
             }
         } while (menugenero != 1 && menugenero != 2);
 
@@ -202,86 +201,73 @@ void registrarSocio()
         cout << "Peso de la mascota? : " << endl;
         cin >> peso;
 
-        // SWITCH QUE DEPENDE DE SI ES PERRO O GATO
-        switch (menutipo)
-        {
-        case 1:
+        // MENU QUE DEPENDE DE SI ES PERRO O GATO
+        do{
+        if (menutipo == 1)
         { // En caso de que sea perro
-            int menurazaperro;
+            do
+            {
+                cout << "Raza del perro:" << endl;
+                cout << "1)labrador" << endl;
+                cout << "2)ovejero" << endl;
+                cout << "3)bulldog" << endl;
+                cout << "4)pitbull" << endl;
+                cout << "5)collie" << endl;
+                cout << "6)pekines" << endl;
+                cout << "7)otro" << endl;
+                cin >> menurazaperro;
 
-            cout << "Raza del perro:" << endl;
-            cout << "1)labrador" << endl;
-            cout << "2)ovejero" << endl;
-            cout << "3)bulldog" << endl;
-            cout << "4)pitbull" << endl;
-            cout << "5)collie" << endl;
-            cout << "6)pekines" << endl;
-            cout << "7)otro" << endl;
-            cin >> menurazaperro;
-
-            switch (menurazaperro)
-            {
-            case 1:
-            {
-                razaperro = labrador;
-                break;
-            }
-            case 2:
-            {
-                razaperro = ovejero;
-                break;
-            }
-            case 3:
-            {
-                razaperro = bulldog;
-                break;
-            }
-            case 4:
-            {
-                razaperro = pitbull;
-                break;
-            }
-            case 5:
-            {
-                razaperro = collie;
-                break;
-            }
-            case 6:
-            {
-                razaperro = pekines;
-                break;
-            }
-            case 7:
-            {
-                razaperro = otro;
-            }
-            default:
-                cout << "Raza Invalida" << endl;
-                break;
-            }
+                if (menurazaperro == 1)
+                {
+                    razaperro = labrador;
+                }
+                else if (menurazaperro == 2)
+                {
+                    razaperro = ovejero;
+                }
+                else if (menurazaperro == 3)
+                {
+                    razaperro = bulldog;
+                }
+                else if (menurazaperro == 4)
+                {
+                    razaperro = pitbull;
+                }
+                else if (menurazaperro == 5)
+                {
+                    razaperro = collie;
+                }
+                else if (menurazaperro == 6)
+                {
+                    razaperro = pekines;
+                }
+                else if (menurazaperro == 7)
+                {
+                    razaperro = otro;
+                }
+                else
+                    cout << "INVALIDO " << endl;
+                    sleep (2);
+            } while (menurazaperro != 1 && menurazaperro != 2 && menurazaperro != 3 && menurazaperro != 4 && menurazaperro != 5 && menurazaperro != 6 && menurazaperro != 7);
+            do {
             cout << "¿Tiene vacuna? " << endl;
             cout << "1-Si" << endl;
             cout << "2-No" << endl;
             cin >> menuvacuna;
-            switch (menuvacuna)
-            {
-            case 1:
+            if (menuvacuna==1)
                 vacunaCachorro = true;
-                break;
-            case 2:
+            else if (menuvacuna==2)
                 vacunaCachorro = false;
-                break;
-            default:
-                break;
-            }
+            else
+                cout << "INVALIDO " << endl;
+                sleep(2);
+            } while(menuvacuna != 1 && menuvacuna != 2);
             DtPerro dtperro = DtPerro(mnombre, genero, peso, 0, razaperro, vacunaCachorro);
-
             registrarSocio(ci, nombre, dtperro);
             break;
         }
-        case 2:
+        if (menutipo == 2)
         { // En caso de que sea gato
-            int menutipopelo;
             do
             {
                 cout << "Seleccionar tipo de pelo: " << endl;
@@ -298,17 +284,19 @@ void registrarSocio()
                     tipopelo = Largo;
                 else
                     cout << "INVALIDO " << endl;
-
+                    sleep (2);
             } while (menutipopelo != 1 && menutipopelo != 2 && menutipopelo != 3);
 
             DtGato dtgato = DtGato(mnombre, genero, peso, 0, tipopelo);
             registrarSocio(ci, nombre, dtgato);
             break;
         }
-        default:
+        else {
             cout << "INVALIDO" << endl;
-            break;
+            sleep(2);
         }
+            
+        }while(menutipo != 1 && menutipo != 2);
     }
     catch (invalid_argument &e)
     {
@@ -335,7 +323,7 @@ void agregarMascota(string ci, DtMascota &dtMascota)
     {
         try
         {
-            
+
             DtPerro &dtperro = dynamic_cast<DtPerro &>(dtMascota);
             Perro *perro = new Perro(dtperro.getNombre(), dtperro.getGenero(), dtperro.getPeso(), dtperro.getRacionDiaria(), dtperro.getRaza(), dtperro.getVacunaCachorro());
             coleccionSocios.socio[f]->setMascota(perro);
@@ -807,7 +795,8 @@ void menu()
     cout << "   10)Mostrar Socios y Mascotas" << endl;
     cout << "   0)Salir" << endl;
 }
-string solicitarSocio(){
+string solicitarSocio()
+{
     string ci;
     cout << "_________________________________" << endl;
     cout << "Ingresar Socio" << endl;
@@ -826,18 +815,24 @@ void eliminarSocio(string ci)
             existe = true;
             delete coleccionSocios.socio[i];
 
-            for (int j = i; j < coleccionSocios.topeU - 1; j++) {
+            for (int j = i; j < coleccionSocios.topeU - 1; j++)
+            {
                 coleccionSocios.socio[j] = coleccionSocios.socio[j + 1];
             }
 
-            coleccionSocios.topeU--; 
-        }else{
+            coleccionSocios.topeU--;
+        }
+        else
+        {
             i++;
+        }
     }
-    }
-    if (existe) {
+    if (existe)
+    {
         cout << "Socio con CI " << ci << " eliminado correctamente." << endl;
-    } else {
+    }
+    else
+    {
         cout << "Socio con CI " << ci << " no encontrado." << endl;
     }
     sleep(3);
@@ -907,7 +902,8 @@ int main()
         case 5:
             obtenerMascotas();
             break;
-        case 6:{
+        case 6:
+        {
             string ci = solicitarSocio();
             eliminarSocio(ci);
             break;
