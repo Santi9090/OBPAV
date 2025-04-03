@@ -263,6 +263,8 @@ void registrarSocio()
                 sleep(2);
             } while(menuvacuna != 1 && menuvacuna != 2);
             DtPerro dtperro = DtPerro(mnombre, genero, peso, 0, razaperro, vacunaCachorro);
+            cout << dtperro.getRaza() << endl;
+            sleep (2);
             registrarSocio(ci, nombre, dtperro);
             break;
         }
@@ -456,6 +458,7 @@ void agregarMascota()
             case 7:
             {
                 razaperro = otro;
+                break;
             }
             default:
                 cout << "Raza Invalida" << endl;
@@ -748,28 +751,56 @@ void obtenerMascotas()
         for (int i = 0; i < cantMascotas; i++)
         {
             cout << "Nombre: " << mascotas[i]->getNombre() << endl;
-            cout << "Genero: " << mascotas[i]->getGenero() << endl;
+            cout << "Genero: ";
+            if(mascotas[i]->getGenero() == 0)
+                cout << "Hembra"  << endl;
+                else 
+                cout << "Macho" << endl;
             cout << "Peso: " << mascotas[i]->getPeso() << endl;
             cout << "Racion Diaria: " << mascotas[i]->getRacionDiaria() << endl;
             try
             {
                 DtPerro &dtperro = dynamic_cast<DtPerro &>(*mascotas[i]);
-                cout << "Raza: " << dtperro.getRaza() << endl;
-                cout << "Vacuna Cachorro: " << dtperro.getVacunaCachorro() << endl;
+                cout << "Raza: ";
+                if (dtperro.getRaza()==0)
+                    cout << "Labrador" << endl;
+                if (dtperro.getRaza()==1)
+                    cout << "Ovejero" << endl;
+                if (dtperro.getRaza()==2)
+                    cout << "Bulldog" << endl;
+                if (dtperro.getRaza()==3)
+                    cout << "Pitbull" << endl;
+                if (dtperro.getRaza()==4)
+                    cout << "Collie" << endl;
+                if (dtperro.getRaza()==5)
+                    cout << "Pekines" << endl;
+                if (dtperro.getRaza()==6)
+                    cout << "Otro" << endl;
+                cout << "Vacuna Cachorro: ";
+                    if (dtperro.getVacunaCachorro()==false)
+                        cout << "No" << endl;
+                    else
+                        cout << "Si" << endl;
             }
             catch (bad_cast)
             {
                 try
                 {
                     DtGato &dtgato = dynamic_cast<DtGato &>(*mascotas[i]);
-                    cout << "Tipo Pelo: " << dtgato.getTipoPelo() << endl;
+                    cout << "Tipo Pelo: ";
+                    if (dtgato.getTipoPelo()==0)
+                        cout << "Corto" << endl;
+                    if (dtgato.getTipoPelo()==1)
+                        cout << "Mediano" << endl;
+                    if (dtgato.getTipoPelo()==2)
+                        cout << "Largo" << endl;
                 }
                 catch (bad_cast)
                 {
                 }
             }
         }
-        sleep(3);
+        sleep(7);
     }
     catch (invalid_argument &e)
     {
